@@ -29,7 +29,6 @@ void getData() {
       .then((QuerySnapshot snapshot) {
     snapshot.documents.forEach((f) => items.add('${f.data}}'));
   });
-  print(items);
 }
 
 class FirestoreData extends StatelessWidget {
@@ -38,8 +37,10 @@ class FirestoreData extends StatelessWidget {
      Widget build(BuildContext context) {
        return Center(
           child: Column(
+         mainAxisSize: MainAxisSize.min,   
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
+          
           RaisedButton(
             child: Text('Create Record'),
             onPressed: () {
@@ -56,3 +57,5 @@ class FirestoreData extends StatelessWidget {
       ));
 }
 }
+
+

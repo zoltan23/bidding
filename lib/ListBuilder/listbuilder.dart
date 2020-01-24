@@ -14,15 +14,15 @@ class ListItems extends StatelessWidget {
   Widget build(BuildContext context) {
     print(items);
     return ListView.builder(
-        shrinkWrap: true,
-        itemCount: items.length,
-        itemBuilder: (context, index) {
-          return Card(
-            child: ListTile(
-              //onTap: () {},
-              title: Text(items[index]),
-            ),
-          );
-        });
+    shrinkWrap: true,
+    itemCount: items.length,
+    itemBuilder: (context, index) {
+      return Card(
+        child: ListTile(
+          //onTap: () {},
+          title: Text(items[index]),
+        ),
+      );
+    });
   }
 }
