@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "882287753859",
+    "firebase_url": "https://thermal-bids.firebaseio.com",
+    "project_id": "thermal-bids",
+    "storage_bucket": "thermal-bids.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:882287753859:android:2b20494dc502734c7c79b6",
+        "android_client_info": {
+          "package_name": "com.example.bidding"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "882287753859-41bkg8pnlburalf5elflslcnr789shlh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDEy0MM2HNRr33fEfbRQocrMO5-unwBdBo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "882287753859-41bkg8pnlburalf5elflslcnr789shlh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
