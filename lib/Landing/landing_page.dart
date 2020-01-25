@@ -1,6 +1,35 @@
 import 'package:flutter/material.dart';
+import '../Navbar/navbar.dart';
 import '../ListBuilder/firebase_crud.dart';
 import '../ListBuilder/listbuilder.dart';
+
+class LandingPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
+            colors: [
+              Color.fromRGBO(195, 20, 50, 1.0), 
+              Color.fromRGBO(36, 20, 50, 1.0)
+              ]),
+        ),
+        
+        child: SingleChildScrollView(
+                  child: Column(
+            children: <Widget>[Navbar(), HomePage()],
+          ),
+        ),
+        
+      ),
+      );
+  }
+}
+
+
 
 List<Widget> pageChildren(double width, context) {
   return <Widget>[
@@ -56,7 +85,7 @@ showModalBottomSheet(context: context, builder: (builder) {
   ];
 }
 
-class LandingPage extends StatelessWidget {
+class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
@@ -75,3 +104,4 @@ class LandingPage extends StatelessWidget {
     );
   }
 }
+

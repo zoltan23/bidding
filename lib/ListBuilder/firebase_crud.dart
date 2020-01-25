@@ -57,5 +57,3 @@ class FirestoreData extends StatelessWidget {
       ));
 }
 }
-
-

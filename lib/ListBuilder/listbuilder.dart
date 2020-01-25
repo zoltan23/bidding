@@ -12,7 +12,6 @@ List<String> items = [
 class ListItems extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    print(items);
     return ListView.builder(
     shrinkWrap: true,
     itemCount: items.length,
