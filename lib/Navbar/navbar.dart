@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+
+
 class Navbar extends StatelessWidget {
   @override
   Widget build(BuildContext contest) {
@@ -33,21 +35,36 @@ class DesktopNavbar extends StatelessWidget {
             ),
             Row(
               children: <Widget>[
-                Text('Home', 
-                style: TextStyle(color: Colors.white),
+                RaisedButton(
+                                  child: Text('Home', 
+                  style: TextStyle(color: Colors.white),
+                  ),
+                  onPressed: () {
+                    
+                  },
                 ),
                 SizedBox(
                   width: 30,
                   ),
-                Text('About Us', 
-                style: TextStyle(color: Colors.white),
+                RaisedButton(
+                                  child: Text('CRUD', 
+                  style: TextStyle(color: Colors.white),
+                                  ),
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/firebase');
+                  }
                 ),
                  SizedBox(
                   width: 30,
                   ),
-                  Text('Portfolio', 
+                  RaisedButton(
+                                      child: Text('Portfolio', 
                 style: TextStyle(color: Colors.white),
                 ),
+                onPressed: () {
+
+                },
+                  ),
                  SizedBox(
                   width: 30,
                   ),
@@ -69,6 +86,7 @@ class DesktopNavbar extends StatelessWidget {
     );
   }
 }
+
 class MobileNavbar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -86,23 +104,38 @@ class MobileNavbar extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Text(
-                  "Home",
-                  style: TextStyle(color: Colors.white),
+                RaisedButton(
+                                  child: Text(
+                    "Home",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onPressed: () {
+
+                  },
                 ),
                 SizedBox(
                   width: 30,
                 ),
-                Text(
-                  "About Us",
-                  style: TextStyle(color: Colors.white),
+                RaisedButton(
+                  child: Text(
+                                "CRUD",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onPressed: () {
+
+                  },
                 ),
                 SizedBox(
                   width: 30,
                 ),
-                Text(
-                  "Portfolio",
-                  style: TextStyle(color: Colors.white),
+                RaisedButton(
+                  child: Text(
+                                "Portfolio",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onPressed: () {
+
+                  },
                 ),
               ],
             ),

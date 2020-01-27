@@ -29,8 +29,6 @@ class LandingPage extends StatelessWidget {
   }
 }
 
-
-
 List<Widget> pageChildren(double width, context) {
   return <Widget>[
     Container(
@@ -39,12 +37,12 @@ List<Widget> pageChildren(double width, context) {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
-            'Website \nDevelopers',
-            style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 40.0,
-                color: Colors.white),
-          ),
+              'Website \nDevelopers',
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 40.0,
+                  color: Colors.white),
+            ),
           Text(
             "We have taken on a fun project",
             style: TextStyle(
@@ -57,8 +55,7 @@ List<Widget> pageChildren(double width, context) {
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(10.0))),
             onPressed: () {
-
-showModalBottomSheet(context: context, builder: (builder) {
+                showModalBottomSheet(context: context, builder: (builder) {
       return Container(
         child: Text('Hello From Modal Bottom Sheet'),
         padding: EdgeInsets.all(40.0),
@@ -73,7 +70,25 @@ showModalBottomSheet(context: context, builder: (builder) {
                   )),
             ),
           ),
-          FirestoreData(),
+          AlertDialog(
+        title: Text('Rewind and remember'),
+        content: SingleChildScrollView(
+          child: ListBody(
+            children: <Widget>[
+              Text('You will never be satisfied.'),
+              Text('You\’re like me. I’m never satisfied.'),
+            ],
+          ),
+        ),
+        actions: <Widget>[
+          FlatButton(
+            child: Text('Regret'),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      ),
           ListItems(),
         ],
       ),

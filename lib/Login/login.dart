@@ -12,6 +12,27 @@ class _SignInState extends State<SignIn> {
   String email = '';
   String password = '';
 
+  _onTapImage(BuildContext context) {
+    return Stack(
+      alignment: Alignment.center,
+      children: <Widget>[
+        Image.network('https://via.placeholder.com/150',fit: BoxFit.contain,), // Show your Image
+        Align(
+          alignment: Alignment.topRight,
+          child: RaisedButton.icon(
+              color: Theme.of(context).accentColor,
+              textColor: Colors.white,
+              onPressed: () => Navigator.pop(context),
+              icon: Icon(
+                Icons.close,
+                color: Colors.white,
+              ),
+              label: Text('Close')),
+        ),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,17 +74,16 @@ class _SignInState extends State<SignIn> {
                   'Sign In With User Name and Password',
                   style: TextStyle(color: Colors.purple),
                 ),
-                onPressed: () async {
-                  dynamic result = await _auth.signInWithEmailAndPassword(email, password);
-                  if(result == null) {
-                    print('error');
-                  } else {
-                    print('Signed In');
-                    print(result.uid);
-                  }
-                Navigator.pushNamed(context, '/landing');
+                onPressed: () {
+                  showDialog(
+                    context: context,
+                    builder: (_) => Alert(),
+                  );
+
                 },
+  
               ),
+              
             ],
           ),
         ),
@@ -72,104 +92,27 @@ class _SignInState extends State<SignIn> {
   }
 }
 
-// class SignIn extends StatefulWidget {
-//   @override
-//   _SignInState createState() => _SignInState();
-// }
+class Alert extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+        title: Text('Login Alert!'),
+        content: const Text('Are you sure you want to login?'),
+        actions: <Widget>[
+          FlatButton(
+            child: Text('Yes'),
+            onPressed: () {
+             Navigator.pushNamed(context, '/landing');
+            },
+          ),
+          FlatButton(
+            child: Text('No'),
+            onPressed: () {
+             Navigator.of(context).pop();
+            },
+          ),
+        ],
+      );
+  }
+}
 
-// class _SignInState extends State<SignIn> {
-//   TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);
-
-// //  final AuthService _auth = AuthService();
-
-//   String email = '';
-//   String password = '';
-//   String error = '';
-
-//   @override
-//   Widget build(BuildContext context) {
-//     final emailField = TextField(
-//       obscureText: false,
-//       style: style,
-//       decoration: InputDecoration(
-//           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-//           hintText: "Email",
-//           border:
-//               OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
-//       onChanged: (val) {
-//         setState(() => email = val);
-//       },
-//     );
-//     final passwordField = TextField(
-//       obscureText: true,
-//       style: style,
-//       decoration: InputDecoration(
-//           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-//           hintText: "Password",
-//           border:
-//               OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
-//       onChanged: (val) {
-//         setState(() => password = val);
-//       },
-//     );
-//     final loginButon = Material(
-//       elevation: 5.0,
-//       borderRadius: BorderRadius.circular(30.0),
-//       color: Color(0xff01A0C7),
-//       child: MaterialButton(
-//         minWidth: MediaQuery.of(context).size.width,
-//         padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-//         // onPressed: () async {
-//         //   dynamic result = await _auth.signInWithEmailAndPassword(email, password);
-//         //   if (result == null) {
-//         //     setState(() => error = 'Invalid creds');
-//         //   } else {
-//         //     print('signed in');
-//         //     print(result);
-//         //   }
-//         onPressed: () {
-//           print('Pressed');
-//         },
-//         child: Text("Login",
-//             textAlign: TextAlign.center,
-//             style: style.copyWith(
-//                 color: Colors.white, fontWeight: FontWeight.bold)),
-//       ),
-//     );
-
-//     return Scaffold(
-//       body: Center(
-//         child: Container(
-//           color: Colors.white,
-//           child: Padding(
-//             padding: const EdgeInsets.all(36.0),
-//             child: Column(
-//               crossAxisAlignment: CrossAxisAlignment.center,
-//               mainAxisAlignment: MainAxisAlignment.center,
-//               children: <Widget>[
-//                 SizedBox(
-//                   height: 155.0,
-//                   child: Image.asset(
-//                     "assets/logo.png",
-//                     fit: BoxFit.contain,
-//                   ),
-//                 ),
-//                 SizedBox(height: 45.0),
-//                 emailField,
-//                 SizedBox(height: 25.0),
-//                 passwordField,
-//                 SizedBox(
-//                   height: 35.0,
-//                 ),
-//                 loginButon,
-//                 SizedBox(
-//                   height: 15.0,
-//                 ),
-//               ],
-//             ),
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }
