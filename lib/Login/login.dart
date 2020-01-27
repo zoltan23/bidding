@@ -8,6 +8,7 @@ class SignIn extends StatefulWidget {
 
 class _SignInState extends State<SignIn> {
   final AuthService _auth = AuthService();
+  final _formkey = GlobalKey<FormState>();
 
   String email = '';
   String password = '';
@@ -33,18 +34,29 @@ class _SignInState extends State<SignIn> {
         ),
         padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
         child: Form(
+          key: _formkey,
           child: Column(
             children: <Widget>[
               SizedBox(height: 20.0),
-              TextFormField(
+              TextFormField(               
+                decoration:               
+                InputDecoration(
+                  hintText: "Email",
+                  errorStyle: TextStyle(color: Colors.yellow)),
+                validator: (val) => val.isEmpty ? 'Enter a valid email.' : null,
                 onChanged: (val) {
                   setState(() => email = val.trim());
                 }),
               SizedBox(height: 20.0),
               TextFormField(
+                decoration: 
+                InputDecoration(
+                  hintText: "Password",
+                  errorStyle: TextStyle(color: Colors.yellow)),
+                validator: (val) => val.length < 6 ? 'Enter a password 6+ chars long' : null,
                 obscureText: true,
                 onChanged: (val) {
-                  setState(() => password = val);
+                  setState(() => password = val.trim());
                 }),
               SizedBox(height: 20.0),
               RaisedButton(
@@ -54,6 +66,7 @@ class _SignInState extends State<SignIn> {
                   style: TextStyle(color: Colors.purple),
                 ),
                 onPressed: () async {
+                  if(_formkey.currentState.validate()){
                   dynamic result = await _auth.signInWithEmailAndPassword(email, password);
                   if(result == null) {
                     print('error');
@@ -65,6 +78,7 @@ class _SignInState extends State<SignIn> {
                     print('Signed In');
                     print(result.uid);
                     Navigator.pushNamed(context, '/landing');
+                  }
                   }
                 },
               ),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../Navbar/navbar.dart';
-import '../ListBuilder/firebase_crud.dart';
 import '../ListBuilder/listbuilder.dart';
 
 class LandingPage extends StatelessWidget {

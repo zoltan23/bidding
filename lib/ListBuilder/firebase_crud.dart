@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase/firebase.dart' as fb;
 import 'package:firebase/firestore.dart' as fs;
+
 //import 'package:cloud_firestore/cloud_firestore.dart';
 
 fs.Firestore firestore = fb.firestore();
@@ -54,6 +55,7 @@ class FirestoreData extends StatelessWidget {
             child: Text('View Record'),
             onPressed: () {
               getData();
+              Navigator.of(context).pushNamed('/list');
             },
           ),
           RaisedButton(

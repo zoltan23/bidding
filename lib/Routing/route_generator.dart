@@ -6,8 +6,9 @@ import '../ListBuilder/firebase_crud.dart';
 import '../HomePage/home_page.dart';
 
 class RouteGenerator {
+  //String data = 'Test'; 
   static Route<dynamic> generateRoute(RouteSettings settings) {
-    //  final args = settings.arguments;
+    //final args = settings.arguments;
 
     switch (settings.name) {
       case '/':
