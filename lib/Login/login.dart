@@ -12,27 +12,6 @@ class _SignInState extends State<SignIn> {
   String email = '';
   String password = '';
 
-  _onTapImage(BuildContext context) {
-    return Stack(
-      alignment: Alignment.center,
-      children: <Widget>[
-        Image.network('https://via.placeholder.com/150',fit: BoxFit.contain,), // Show your Image
-        Align(
-          alignment: Alignment.topRight,
-          child: RaisedButton.icon(
-              color: Theme.of(context).accentColor,
-              textColor: Colors.white,
-              onPressed: () => Navigator.pop(context),
-              icon: Icon(
-                Icons.close,
-                color: Colors.white,
-              ),
-              label: Text('Close')),
-        ),
-      ],
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,16 +53,21 @@ class _SignInState extends State<SignIn> {
                   'Sign In With User Name and Password',
                   style: TextStyle(color: Colors.purple),
                 ),
-                onPressed: () {
-                  showDialog(
+                onPressed: () async {
+                  dynamic result = await _auth.signInWithEmailAndPassword(email, password);
+                  if(result == null) {
+                    print('error');
+                    showDialog(
                     context: context,
-                    builder: (_) => Alert(),
-                  );
-
+                    builder: (_) => Alert()
+                    );
+                  } else {
+                    print('Signed In');
+                    print(result.uid);
+                    Navigator.pushNamed(context, '/landing');
+                  }
                 },
-  
               ),
-              
             ],
           ),
         ),
@@ -97,16 +81,10 @@ class Alert extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
         title: Text('Login Alert!'),
-        content: const Text('Are you sure you want to login?'),
+        content: const Text('There was an error with your E-Mail/Password combination. Please try again.'),
         actions: <Widget>[
           FlatButton(
-            child: Text('Yes'),
-            onPressed: () {
-             Navigator.pushNamed(context, '/landing');
-            },
-          ),
-          FlatButton(
-            child: Text('No'),
+            child: Text('Ok'),
             onPressed: () {
              Navigator.of(context).pop();
             },
@@ -115,4 +93,3 @@ class Alert extends StatelessWidget {
       );
   }
 }
-
