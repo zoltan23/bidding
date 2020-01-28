@@ -93,18 +93,19 @@ class _SignInState extends State<SignIn> {
                     style: TextStyle(color: Colors.purple, fontSize: 18.0),
                   ),
                   onPressed: () async {
-                    if (_formkey.currentState.validate()) {
-                      dynamic result = await _auth.signInWithEmailAndPassword(
-                          email, password);
-                      if (result == null) {
-                        print('error');
-                        showDialog(context: context, builder: (_) => Alert());
-                      } else {
-                        print('Signed In');
-                        print(result.uid);
-                        Navigator.pushNamed(context, '/landing');
-                      }
-                    }
+                    // if (_formkey.currentState.validate()) {
+                    //   dynamic result = await _auth.signInWithEmailAndPassword(
+                    //       email, password);
+                    //   if (result == null) {
+                    //     print('error');
+                    //     showDialog(context: context, builder: (_) => Alert());
+                    //   } else {
+                    //     print('Signed In');
+                    //     print(result.uid);
+                    //     Navigator.pushNamed(context, '/landing');
+                    //   }
+                    // }
+                    Navigator.pushNamed(context, '/landing');
                   },
                 ),
               ),

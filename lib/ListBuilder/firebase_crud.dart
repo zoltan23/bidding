@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:firebase/firebase.dart' as fb;
 import 'package:firebase/firestore.dart' as fs;
-
 //import 'package:cloud_firestore/cloud_firestore.dart';
+import 'listbuilder.dart';
 
 fs.Firestore firestore = fb.firestore();
 fs.CollectionReference ref = firestore.collection('books');
+
+List<String> items = ['list1', 'list2'];
 
 void createRecord() async {
   ref.add({
@@ -14,10 +16,12 @@ void createRecord() async {
     });
 }
 
-void  getData() async {
+void getData() async {
 final docs = await firestore
         .collection('books').get()
-.then((data) => data.docs.map((doc) => doc.data()).toList());
+.then((data) => data.docs.map((doc) => 
+doc.data()).toList()
+);
 print(docs);
 }
 
@@ -34,7 +38,6 @@ ref.doc('1LCjeYV8pfzfQgw9gN6H').update(
 );
 }
 
-
 class FirestoreData extends StatelessWidget {
   
   @override
@@ -44,7 +47,6 @@ class FirestoreData extends StatelessWidget {
          mainAxisSize: MainAxisSize.min,   
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
-          
           RaisedButton(
             child: Text('Create Record'),
             onPressed: () {
@@ -55,7 +57,10 @@ class FirestoreData extends StatelessWidget {
             child: Text('View Record'),
             onPressed: () {
               getData();
-              Navigator.of(context).pushNamed('/list');
+            User user = User(items);
+            Navigator.push(context, MaterialPageRoute(
+              builder: (context) => ListItems(user: user
+              )));
             },
           ),
           RaisedButton(
@@ -70,10 +75,39 @@ class FirestoreData extends StatelessWidget {
               updateRecord();
             },
           ),
+              StreamBuilder(
+              stream: userLinks(firestore),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData)
+                  return CircularProgressIndicator();
+                else
+                  return Container(
+                    width: 500,
+                    //width: width > 698 ? width / 3 : width,
+                    child: Column(
+                      children: <Widget>[
+                        for(var link in snapshot.data)
+                          Text(link.toString(), 
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 16.0),),
+                      ],
+                    ),
+                  );
+              },
+            ),
         ],
       ));
 }
 }
+
+  Stream<List<Map<String, dynamic>>> userLinks(fs.Firestore firestore) {
+    return firestore
+        .collection('books')
+        .onSnapshot
+        .map((data) => data.docs.map((doc) => doc.data()).toList());
+  }
+
 
 // THIS WORKS WITH ANDROID BUT NOT THE WEB
 //final databaseReference = Firestore.instance;

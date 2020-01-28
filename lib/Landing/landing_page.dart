@@ -88,7 +88,7 @@ List<Widget> pageChildren(double width, context) {
           ),
         ],
       ),
-          ListItems(),
+          //ListItems(),
         ],
       ),
     ),
