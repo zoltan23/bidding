@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class User {
-  List<String> items; 
+  List<Map<String, dynamic>> items; 
   User(this.items);
 }
 
@@ -10,40 +10,29 @@ class ListItems extends StatelessWidget {
   ListItems({this.user});
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-    shrinkWrap: true,
-    itemCount: user.items.length,
-    itemBuilder: (context, index) {
-      return Card(
-        child: ListTile(
-          //onTap: () {},
-          title: Text(user.items[index]),
+    return Container(
+      decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
+            colors: [
+              Color.fromRGBO(195, 20, 50, 1.0), 
+              Color.fromRGBO(36, 20, 50, 1.0)
+              ]),
         ),
-      );
-    });
+      child: ListView.builder(
+      shrinkWrap: true,
+      itemCount: user.items.length,
+      itemBuilder: (context, index) {
+        return Card(
+          color: Color.fromRGBO(255, 255, 225, 1.0),
+          child: ListTile(
+            //onTap: () {},
+            title: Text(user.items[index]['description']),
+          ),
+        );
+      }),
+    );
   }
 }
 
-// class HomePage extends StatelessWidget {
-//   final User user;
- 
-//   HomePage({Key key, this.user}) : super(key: key);
- 
-//   @override
-//   Widget build(BuildContext context) {
-//     // TODO: implement build
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text("Home Page"),
-//       ),
-//       body: Center(
-//         child: RaisedButton(
-//           onPressed: () {
-//             Navigator.pop(context, true);
-//           },
-//           child: Text('Log Out ${user.userName}'),
-//         ),
-//       ),
-//     );
-//   }
-// }

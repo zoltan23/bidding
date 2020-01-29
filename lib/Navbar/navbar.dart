@@ -40,7 +40,7 @@ class DesktopNavbar extends StatelessWidget {
                   style: TextStyle(color: Colors.white),
                   ),
                   onPressed: () {
-                    
+                    Navigator.pushNamed(context, '/landing');
                   },
                 ),
                 SizedBox(
