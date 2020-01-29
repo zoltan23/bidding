@@ -35,6 +35,7 @@ class _SignInState extends State<SignIn> {
         ),
         padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
         child: Card(
+          color: Color.fromRGBO(255, 255, 225, 1.0),
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(18.0)),
           child: Form(
@@ -56,7 +57,7 @@ class _SignInState extends State<SignIn> {
                           borderRadius: BorderRadius.circular(5.0),
                         ),
                         hintText: "Email",
-                        errorStyle: TextStyle(color: Colors.yellow),
+                        errorStyle: TextStyle(color: Colors.red),
                       ),
                       validator: (val) =>
                           val.isEmpty ? 'Enter a valid email.' : null,
@@ -77,7 +78,7 @@ class _SignInState extends State<SignIn> {
                           borderRadius: BorderRadius.circular(5.0),
                         ),
                         hintText: "Password",
-                        errorStyle: TextStyle(color: Colors.yellow),
+                        errorStyle: TextStyle(color: Colors.red),
                       ),
                       validator: (val) => val.length < 6
                           ? 'Enter a password 6+ chars long'
@@ -94,12 +95,11 @@ class _SignInState extends State<SignIn> {
                         borderRadius: BorderRadius.circular(80.0)),
                     onPressed: () async {
                       if (_formkey.currentState.validate()) {
-                        dynamic result = await _auth
-                            .signInWithEmailAndPassword(email, password);
+                        dynamic result = await _auth.signInWithEmailAndPassword(
+                            email, password);
                         if (result == null) {
                           print('error');
-                          showDialog(
-                              context: context, builder: (_) => Alert());
+                          showDialog(context: context, builder: (_) => Alert());
                         } else {
                           print('Signed In');
                           print(result.uid);
@@ -120,17 +120,19 @@ class _SignInState extends State<SignIn> {
                           borderRadius:
                               BorderRadius.all(Radius.circular(80.0))),
                       padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
-                      child: Text('Click Me',
-                          style: TextStyle(
-                            fontSize: 20,
-                          )),
+                      child: Center(
+                        child: Text('Sign In',
+                            style: TextStyle(
+                              fontSize: 20,
+                            )),
+                      ),
                     ),
                   ),
                   SizedBox(
                     height: 50.0,
                   ),
                   SizedBox(
-                    child: Text("Or Sign Up Using"),
+                    child: Text("Or Sign In Using"),
                   ),
                   SizedBox(
                     child: Padding(
@@ -139,9 +141,7 @@ class _SignInState extends State<SignIn> {
                         //crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          Icon(Icons.local_car_wash),
-                          Icon(Icons.pets),
-                          Icon(Icons.pets),
+                          Icon(Icons.face, size: 40.0,),
                         ],
                       ),
                     ),
@@ -151,12 +151,13 @@ class _SignInState extends State<SignIn> {
                         alignment: Alignment(0, .85),
                         child: Text("Or Sign Up Using")),
                   ),
-                  SizedBox(
-                    child: Padding(
-                      padding: const EdgeInsets.only(bottom: 20.0),
-                      child: Text("Sign Up"),
-                    ),
-                  ),
+                  GestureDetector(
+                      child: Text("Sign Up",
+                          style: TextStyle(
+                              fontSize: 18.0,
+                              decoration: TextDecoration.underline,
+                              color: Colors.blue)),
+                      onTap: () {}),
                 ],
               ),
             ),
