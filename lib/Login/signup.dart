@@ -1,17 +1,23 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:hello_world/Login/login.dart';
 import 'package:hello_world/sevices/auth.dart';
+import 'package:firebase/firebase.dart' as fb;
+import 'package:firebase/firestore.dart' as fs;
 
-class SignIn extends StatefulWidget {
+fs.Firestore firestore = fb.firestore();
+fs.CollectionReference ref = firestore.collection('users');
+
+class SignUp extends StatefulWidget {
   @override
-  _SignInState createState() => _SignInState();
+  _SignUpState createState() => _SignUpState();
 }
 
-class _SignInState extends State<SignIn> {
+class _SignUpState extends State<SignUp> {
   final AuthService _auth = AuthService();
   final _formkey = GlobalKey<FormState>();
 
-  String email = '';
-  String password = '';
+  String email = '', password = '', firstName = '', lastName = '', error = '';
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +27,7 @@ class _SignInState extends State<SignIn> {
         centerTitle: true,
         backgroundColor: Color.fromRGBO(146, 42, 42, 1.0),
         elevation: 0.0,
-        title: Text('Login'),
+        title: Text('Sign Up'),
       ),
       body: Container(
         decoration: BoxDecoration(
@@ -44,11 +50,53 @@ class _SignInState extends State<SignIn> {
               padding: const EdgeInsets.all(30.0),
               child: Column(
                 children: <Widget>[
+                  Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: TextFormField(
+                            decoration: InputDecoration(
+                              contentPadding: const EdgeInsets.all(8.0),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(5.0),
+                              ),
+                              hintText: "First Name",
+                              errorStyle: TextStyle(color: Colors.red),
+                            ),
+                            validator: (val) => val.isEmpty
+                                ? 'Enter a valid first name.'
+                                : null,
+                            onChanged: (val) {
+                              setState(() => firstName = val.trim());
+                            }),
+                      ),
+                      SizedBox(
+                        width: 15.0,
+                      ),
+                      Expanded(
+                        child: TextFormField(
+                            decoration: InputDecoration(
+                              contentPadding: const EdgeInsets.all(8.0),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(5.0),
+                              ),
+                              hintText: "Last Name",
+                              errorStyle: TextStyle(color: Colors.red),
+                            ),
+                            validator: (val) =>
+                                val.isEmpty ? 'Enter a valid last name.' : null,
+                            onChanged: (val) {
+                              setState(() => lastName = val.trim());
+                            }),
+                      ),
+                    ],
+                  ),
                   SizedBox(
                     height: 60.0,
                     child: Align(
                         alignment: Alignment(-.99, .95), child: Text("Email")),
                   ),
+
+                  //Email
                   TextFormField(
                       decoration: InputDecoration(
                         prefixIcon: Icon(Icons.person),
@@ -70,6 +118,8 @@ class _SignInState extends State<SignIn> {
                         alignment: Alignment(-.99, .95),
                         child: Text("Password")),
                   ),
+
+                  //Password
                   TextFormField(
                       decoration: InputDecoration(
                         prefixIcon: Icon(Icons.lock),
@@ -94,22 +144,10 @@ class _SignInState extends State<SignIn> {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(80.0)),
                     onPressed: () {
-                      Navigator.pushNamed(context, '/landing');
-                    }, 
-                    // async { 
-                    //   if (_formkey.currentState.validate()) {
-                    //     dynamic result = await _auth.signInWithEmailAndPassword(
-                    //         email, password);
-                    //     if (result == null) {
-                    //       print('error');
-                    //       showDialog(context: context, builder: (_) => Alert());
-                    //     } else {
-                    //       print('Signed In');
-                    //       print(result.uid);
-                    //       Navigator.pushNamed(context, '/landing');
-                    //     }
-                    //   }
-                    // },
+                      if (_formkey.currentState.validate()) {
+                        handleSignUp();
+                      }
+                    },
                     child: Container(
                       width: double.infinity,
                       decoration: BoxDecoration(
@@ -124,7 +162,7 @@ class _SignInState extends State<SignIn> {
                               BorderRadius.all(Radius.circular(80.0))),
                       padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
                       child: Center(
-                        child: Text('Sign In',
+                        child: Text('Sign Up',
                             style: TextStyle(
                               fontSize: 20,
                             )),
@@ -151,21 +189,7 @@ class _SignInState extends State<SignIn> {
                         ],
                       ),
                     ),
-                  ),
-                  Expanded(
-                    child: Align(
-                        alignment: Alignment(0, .85),
-                        child: Text("Or Sign Up Using")),
-                  ),
-                  GestureDetector(
-                      child: Text("Sign Up",
-                          style: TextStyle(
-                              fontSize: 18.0,
-                              decoration: TextDecoration.underline,
-                              color: Colors.blue)),
-                      onTap: () {
-                        Navigator.pushNamed(context, '/signup');
-                      }),
+                  ),          
                 ],
               ),
             ),
@@ -173,6 +197,23 @@ class _SignInState extends State<SignIn> {
         ),
       ),
     );
+  }
+
+  void handleSignUp() async {
+    dynamic result = await _auth.registerWithEmailAndPassword(email, password);
+    if (result == null) {
+      print(error);
+      showDialog(context: context, builder: (_) => Alert());
+      setState(() => error = error);
+    } else {
+      ref.add({
+        'firstName': '$firstName',
+        'lastName': '$lastName',
+      });
+      setState(() {
+      firstName = '';
+      });
+    }
   }
 }
 

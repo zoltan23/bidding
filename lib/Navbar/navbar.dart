@@ -58,11 +58,11 @@ class DesktopNavbar extends StatelessWidget {
                   width: 30,
                   ),
                   RaisedButton(
-                                      child: Text('Portfolio', 
+                                      child: Text('Sign-Up', 
                 style: TextStyle(color: Colors.white),
                 ),
                 onPressed: () {
-
+                  Navigator.pushNamed(context, '/signup');
                 },
                   ),
                  SizedBox(
@@ -120,9 +120,10 @@ class MobileNavbar extends StatelessWidget {
                   child: Text(
                                 "CRUD",
                     style: TextStyle(color: Colors.white),
+                    
                   ),
                   onPressed: () {
-
+                    Navigator.pushNamed(context, '/firebase');
                   },
                 ),
                 SizedBox(
@@ -130,11 +131,11 @@ class MobileNavbar extends StatelessWidget {
                 ),
                 RaisedButton(
                   child: Text(
-                                "Portfolio",
+                                "Sign-up",
                     style: TextStyle(color: Colors.white),
                   ),
                   onPressed: () {
-
+                    Navigator.pushNamed(context, '/signup');
                   },
                 ),
               ],
