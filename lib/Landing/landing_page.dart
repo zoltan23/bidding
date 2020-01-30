@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import '../Navbar/navbar.dart';
-import '../ListBuilder/firebase_crud.dart';
-import '../ListBuilder/listbuilder.dart';
 
 class LandingPage extends StatelessWidget {
   @override
@@ -17,7 +15,6 @@ class LandingPage extends StatelessWidget {
               Color.fromRGBO(36, 20, 50, 1.0)
               ]),
         ),
-        
         child: SingleChildScrollView(
                   child: Column(
             children: <Widget>[Navbar(), HomePage()],
@@ -70,26 +67,6 @@ List<Widget> pageChildren(double width, context) {
                   )),
             ),
           ),
-          AlertDialog(
-        title: Text('Rewind and remember'),
-        content: SingleChildScrollView(
-          child: ListBody(
-            children: <Widget>[
-              Text('You will never be satisfied.'),
-              Text('You\’re like me. I’m never satisfied.'),
-            ],
-          ),
-        ),
-        actions: <Widget>[
-          FlatButton(
-            child: Text('Regret'),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-          ),
-        ],
-      ),
-          ListItems(),
         ],
       ),
     ),
@@ -119,4 +96,3 @@ class HomePage extends StatelessWidget {
     );
   }
 }
-

@@ -1,27 +1,38 @@
 import 'package:flutter/material.dart';
 
-List<String> items = [
-  // Football(firstName: 'Joe', position: 'QB', college: 'LSU' ),
-  // Football(firstName: 'Ed', position: 'Head Coach', college: 'LSU' ),
-  // Football(firstName: 'Steve', position: 'Coordinator', college: 'LSU' )
-  'football1',
-  'football2',
-  'football3'
-];
+class User {
+  List<Map<String, dynamic>> items; 
+  User(this.items);
+}
 
 class ListItems extends StatelessWidget {
+  final User user;
+  ListItems({this.user});
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-    shrinkWrap: true,
-    itemCount: items.length,
-    itemBuilder: (context, index) {
-      return Card(
-        child: ListTile(
-          //onTap: () {},
-          title: Text(items[index]),
+    return Container(
+      decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
+            colors: [
+              Color.fromRGBO(195, 20, 50, 1.0), 
+              Color.fromRGBO(36, 20, 50, 1.0)
+              ]),
         ),
-      );
-    });
+      child: ListView.builder(
+      shrinkWrap: true,
+      itemCount: user.items.length,
+      itemBuilder: (context, index) {
+        return Card(
+          color: Color.fromRGBO(255, 255, 225, 1.0),
+          child: ListTile(
+            //onTap: () {},
+            title: Text(user.items[index]['description']),
+          ),
+        );
+      }),
+    );
   }
 }
+
