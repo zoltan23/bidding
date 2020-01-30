@@ -17,8 +17,7 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => MyHomePage());
       case '/landing':
         return MaterialPageRoute(builder: (_) => LandingPage());
-      case '/list':
-        return MaterialPageRoute(builder: (_) => ListItems());
+      
       case '/firebase':
         return MaterialPageRoute(builder: (_) => FirestoreData());
       // case '/second':
