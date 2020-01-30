@@ -141,7 +141,10 @@ class _SignInState extends State<SignIn> {
                         //crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          Icon(Icons.face, size: 40.0,),
+                          Icon(
+                            Icons.face,
+                            size: 40.0,
+                          ),
                         ],
                       ),
                     ),
@@ -151,7 +154,6 @@ class _SignInState extends State<SignIn> {
                         alignment: Alignment(0, .85),
                         child: Text("Or Sign Up Using")),
                   ),
-
                   GestureDetector(
                       child: Text("Sign Up",
                           style: TextStyle(
@@ -160,24 +162,6 @@ class _SignInState extends State<SignIn> {
                               color: Colors.blue)),
                       onTap: () {}),
                 ],
-
-                  onPressed: () async {
-                    // if (_formkey.currentState.validate()) {
-                    //   dynamic result = await _auth.signInWithEmailAndPassword(
-                    //       email, password);
-                    //   if (result == null) {
-                    //     print('error');
-                    //     showDialog(context: context, builder: (_) => Alert());
-                    //   } else {
-                    //     print('Signed In');
-                    //     print(result.uid);
-                    //     Navigator.pushNamed(context, '/landing');
-                    //   }
-                    // }
-                    Navigator.pushNamed(context, '/landing');
-                  },
-                ),
-
               ),
             ),
           ),
