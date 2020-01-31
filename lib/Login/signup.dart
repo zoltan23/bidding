@@ -1,6 +1,4 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:hello_world/Login/login.dart';
 import 'package:hello_world/sevices/auth.dart';
 import 'package:firebase/firebase.dart' as fb;
 import 'package:firebase/firestore.dart' as fs;
@@ -50,6 +48,15 @@ class _SignUpState extends State<SignUp> {
               padding: const EdgeInsets.all(30.0),
               child: Column(
                 children: <Widget>[
+                  Row(children: <Widget>[
+                    Expanded(child: Align(
+                      alignment: Alignment(-.98, .95),
+                      child: SizedBox(child: Text("First Name")))),
+                    Expanded(child: Align(
+                      alignment: Alignment(-.96, .95),
+                      child: SizedBox(child: Text("Last Name")))),
+                  ],),
+
                   Row(
                     children: <Widget>[
                       Expanded(
