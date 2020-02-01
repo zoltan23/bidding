@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:hello_world/carousel.dart';
 import '../Navbar/navbar.dart';
 
 class LandingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+  
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
@@ -16,9 +18,12 @@ class LandingPage extends StatelessWidget {
               ]),
         ),
         child: SingleChildScrollView(
-                  child: Column(
-            children: <Widget>[Navbar(), HomePage()],
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints(maxHeight: MediaQuery.of(context).size.height),
+                                      child: Column(
+            children: <Widget>[Navbar(), Expanded(child: CarouselWithIndicator()), Expanded(child: HomePage()), ],
           ),
+                  ),
         ),
         
       ),
@@ -40,6 +45,7 @@ List<Widget> pageChildren(double width, context) {
                   fontSize: 40.0,
                   color: Colors.white),
             ),
+            
           Text(
             "We have taken on a fun project",
             style: TextStyle(
