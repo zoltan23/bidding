@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hello_world/Landing/landing_page.dart';
 import 'package:hello_world/Login/signup.dart';
+import 'package:hello_world/sevices/upload/file_upload.dart';
 import '../Login/login.dart';
 import '../ListBuilder/firebase_crud.dart';
 import '../HomePage/home_page.dart';
@@ -21,6 +22,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => FirestoreData());
       case '/signup':
         return MaterialPageRoute(builder: (_) => SignUp());
+      case '/upload':
+        return MaterialPageRoute(builder: (_) => FileUpload());
       // case '/second':
       //   if (args is String) {
       //     return MaterialPageRoute(

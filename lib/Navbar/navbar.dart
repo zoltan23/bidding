@@ -72,9 +72,11 @@ class DesktopNavbar extends StatelessWidget {
                     color: Colors.pink,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(10.0))),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/upload');
+                      },
                       child: Text(
-                        "Get Started",
+                        "File Upload",
                         style: TextStyle(color: Colors.white),
                       )
                   )
@@ -138,6 +140,18 @@ class MobileNavbar extends StatelessWidget {
                     Navigator.pushNamed(context, '/signup');
                   },
                 ),
+                                  MaterialButton(
+                    color: Colors.pink,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(10.0))),
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/upload');
+                      },
+                      child: Text(
+                        "File Upload",
+                        style: TextStyle(color: Colors.white),
+                      )
+                  ),
               ],
             ),
           )
