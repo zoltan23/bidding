@@ -1,9 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase/firebase.dart' as fb;
 import 'package:firebase/firestore.dart' as fs;
-//import 'package:cloud_firestore/cloud_firestore.dart';
 import 'listbuilder.dart';
 import '../Navbar/navbar.dart';
+import '../models/user.dart';
+import 'listbuilder.dart';
 
 fs.Firestore firestore = fb.firestore();
 fs.CollectionReference ref = firestore.collection('books');
@@ -23,7 +25,8 @@ void getData(context) async {
       .get()
       .then((data) => data.docs.map((doc) => doc.data()).toList());
   print(docs);
-  User user = User(docs);
+  UserList user = UserList(docs);
+  print(user);
   Navigator.push(
       context, MaterialPageRoute(builder: (context) => ListItems(user: user)));
 }
@@ -38,6 +41,14 @@ void updateRecord() {
     'title': 'Updated Title',
   });
 }
+
+  // UserData _userDataFromSnapshot(DocumentSnapshot snapshot) {
+  //   return UserData(
+  //     uid: uid,
+  //     firstName: snapshot.data['firstName'],
+  //   );
+  // }
+
 
 class FirestoreData extends StatelessWidget {
   @override
@@ -87,68 +98,6 @@ class FirestoreData extends StatelessWidget {
     );
   }
 }
-
-// class FirestoreData extends StatelessWidget {
-//   @override
-//      Widget build(BuildContext context) {
-//        return Center(
-//           child: Column(
-//          mainAxisSize: MainAxisSize.min,
-//         crossAxisAlignment: CrossAxisAlignment.stretch,
-//         children: <Widget>[
-//           RaisedButton(
-//             child: Text('Create Record'),
-//             onPressed: () {
-//               createRecord();
-//             },
-//           ),
-//           RaisedButton(
-//             child: Text('View Record'),
-//             onPressed: () {
-//               getData();
-//             User user = User(items);
-//             Navigator.push(context, MaterialPageRoute(
-//               builder: (context) => ListItems(user: user
-//               )));
-//             },
-//           ),
-//           RaisedButton(
-//             child: Text('Delete Record'),
-//             onPressed: () {
-//               deleteRecord();
-//             },
-//           ),
-//           RaisedButton(
-//             child: Text('Update Record'),
-//             onPressed: () {
-//               updateRecord();
-//             },
-//           ),
-//               StreamBuilder(
-//               stream: userLinks(firestore),
-//               builder: (context, snapshot) {
-//                 if (!snapshot.hasData)
-//                   return CircularProgressIndicator();
-//                 else
-//                   return Container(
-//                     width: 500,
-//                     //width: width > 698 ? width / 3 : width,
-//                     child: Column(
-//                       children: <Widget>[
-//                         for(var link in snapshot.data)
-//                           Text(link.toString(),
-//                           style: TextStyle(
-//                             color: Colors.black,
-//                             fontSize: 16.0),),
-//                       ],
-//                     ),
-//                   );
-//               },
-//             ),
-//         ],
-//       ));
-// }
-// }
 
 Stream<List<Map<String, dynamic>>> userLinks(fs.Firestore firestore) {
   return firestore

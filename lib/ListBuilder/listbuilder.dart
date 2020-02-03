@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
-
-class User {
-  List<Map<String, dynamic>> items; 
-  User(this.items);
-}
+import '../models/user.dart';
 
 class ListItems extends StatelessWidget {
-  final User user;
+  final UserList user;
   ListItems({this.user});
   @override
   Widget build(BuildContext context) {
@@ -28,7 +24,7 @@ class ListItems extends StatelessWidget {
           color: Color.fromRGBO(255, 255, 225, 1.0),
           child: ListTile(
             //onTap: () {},
-            title: Text(user.items[index]['description']),
+            title: Text(user.items[index]['title']),
           ),
         );
       }),
