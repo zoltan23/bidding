@@ -10,15 +10,13 @@ final List<String> imgList = [
   'https://images.unsplash.com/photo-1519985176271-adb1088fa94c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=a0c8d632e977f94e5d312d9893258f59&auto=format&fit=crop&w=1355&q=80'
 ];
 
-//void main() => runApp(CarouselDemo());
-
 final Widget placeholder = Container(color: Colors.grey);
 
 final List child = map<Widget>(
   imgList,
   (index, i) {
     return Container(
-      margin: EdgeInsets.all(5.0),
+      margin: EdgeInsets.all(50.0),
       child: ClipRRect(
         borderRadius: BorderRadius.all(Radius.circular(5.0)),
         child: Stack(children: <Widget>[
@@ -106,100 +104,3 @@ class _CarouselWithIndicatorState extends State<CarouselWithIndicator> {
     ]);
   }
 }
-
-class CarouselDemo extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    //Manually operated Carousel
-    final CarouselSlider manualCarouselDemo = CarouselSlider(
-      items: child,
-      autoPlay: false,
-      enlargeCenterPage: false,
-      viewportFraction: 0.5,
-      aspectRatio: 2.0,
-    );
-
-    return 
-    MaterialApp(
-      title: 'demo',
-      home: Scaffold(
-        appBar: AppBar(title: Text('Carousel slider demo')),
-        body: 
-        Column(
-          children: <Widget>[
-            ListView(
-              children: <Widget>[
-                Padding(
-                    padding: EdgeInsets.symmetric(vertical: 15.0),
-                    child: Column(children: [
-                      Text('Manuell Carousel'),
-                      manualCarouselDemo,
-                    ])),
-                // Padding(
-                //     padding: EdgeInsets.symmetric(vertical: 15.0),
-                //     child: Column(children: [
-                //       Text('Auto Playing Carousel'),
-                //       autoPlayDemo,
-                //     ])),
-                // Padding(
-                //     padding: EdgeInsets.symmetric(vertical: 15.0),
-                //     child: Column(children: [
-                //       Text('Button Controlled Carousel'),
-                //       buttonDemo(),
-                //     ])),
-                // Padding(
-                //     padding: EdgeInsets.symmetric(vertical: 15.0),
-                //     child: Column(children: [
-                //       Text('Full Screen Carousel'),
-                //       coverScreenExample,
-                //     ])),
-                // Padding(
-                //     padding: EdgeInsets.symmetric(vertical: 15.0),
-                //     child: Column(children: [
-                //       Text('Carousel With Indecator'),
-                //       CarouselWithIndicator(),
-                //     ])),
-                // Padding(
-                //     padding: EdgeInsets.symmetric(vertical: 15.0),
-                //     child: Column(children: [
-                //       Text('Pause When Touched Carousel'),
-                //       touchDetectionDemo,
-                //     ])),
-                // Padding(
-                //     padding: EdgeInsets.symmetric(vertical: 15.0),
-                //     child: Column(children: [
-                //       Text('No infinity scroll carousel'),
-                //       nonLoopingCarousel,
-                //     ])),
-                // Padding(
-                //     padding: EdgeInsets.symmetric(vertical: 15.0),
-                //     child: Column(children: [
-                //       Text('Vertical scroll carousel'),
-                //       verticalScrollCarousel,
-                //     ])),
-                // Padding(
-                //     padding: EdgeInsets.only(top: 15.0),
-                //     //Builder needed to provide mediaQuery context from material app
-                //     child: Builder(builder: (context) {
-                //       return Column(children: [
-                //         Text('Full screen carousel'),
-                //         getFullScreenCarousel(context),
-                //       ]);
-                //     })),
-                // Padding(
-                //     padding: EdgeInsets.only(top: 15.0),
-                //     child: Builder(builder: (context) {
-                //       return Column(children: [
-                //         Text('On demand item carousel'),
-                //         getOnDemandCarousel(context),
-                //       ]);
-                //     })),
-              ],
-            ),
-          ],
-        )
-      ),
-    );
-  }
-}
-
