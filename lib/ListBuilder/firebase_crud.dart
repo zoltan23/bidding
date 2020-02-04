@@ -44,15 +44,6 @@ class FirestoreData extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-              begin: Alignment.centerLeft,
-              end: Alignment.centerRight,
-              colors: [
-                Color.fromRGBO(195, 20, 50, 1.0),
-                Color.fromRGBO(36, 20, 50, 1.0)
-              ]),
-        ),
         child: Column(
           children: <Widget>[
             Navbar(),

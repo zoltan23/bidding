@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hello_world/carousel.dart';
 import '../Navbar/navbar.dart';
 
 class LandingPage extends StatelessWidget {
@@ -6,23 +7,16 @@ class LandingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.centerLeft,
-            end: Alignment.centerRight,
-            colors: [
-              Color.fromRGBO(195, 20, 50, 1.0), 
-              Color.fromRGBO(36, 20, 50, 1.0)
-              ]),
-        ),
         child: SingleChildScrollView(
-                  child: Column(
-            children: <Widget>[Navbar(), HomePage()],
+          child: Column(
+            children: <Widget>[
+              Navbar(),
+              HomePage(),
+            ],
           ),
         ),
-        
       ),
-      );
+    );
   }
 }
 
@@ -30,34 +24,39 @@ List<Widget> pageChildren(double width, context) {
   return <Widget>[
     Container(
       width: width,
-      child: Column(     
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
-              'Website \nDevelopers',
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 40.0,
-                  color: Colors.white),
-            ),
+            'Website \nDevelopers',
+            style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 40.0,
+                color: Colors.black),
+          ),
+                    SizedBox(
+                      height: 400.0,
+                      child: CarouselWithIndicator()),
           Text(
             "We have taken on a fun project",
             style: TextStyle(
-              color: Colors.white,
+              color: Colors.black,
               fontSize: 16.0,
             ),
           ),
           MaterialButton(
-            color: Colors.white,
+            color: Colors.blueGrey,
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(10.0))),
             onPressed: () {
-                showModalBottomSheet(context: context, builder: (builder) {
-      return Container(
-        child: Text('Hello From Modal Bottom Sheet'),
-        padding: EdgeInsets.all(40.0),
-      );
-    });
+              showModalBottomSheet(
+                  context: context,
+                  builder: (builder) {
+                    return Container(
+                      child: Text('Hello From Modal Bottom Sheet'),
+                      padding: EdgeInsets.all(40.0),
+                    );
+                  });
             },
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 20.0),
@@ -69,10 +68,6 @@ List<Widget> pageChildren(double width, context) {
           ),
         ],
       ),
-    ),
-    Padding(
-      padding: const EdgeInsets.symmetric(vertical: 40.0),
-      child: Image.asset('assets/images/lp_image.png', width: width),
     ),
   ];
 }
