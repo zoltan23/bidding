@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hello_world/carousel.dart';
 import '../Navbar/navbar.dart';
 
 class LandingPage extends StatelessWidget {
@@ -28,17 +29,20 @@ List<Widget> pageChildren(double width, context) {
             style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 40.0,
-                color: Colors.white),
+                color: Colors.black),
           ),
+                    SizedBox(
+                      height: 400.0,
+                      child: CarouselWithIndicator()),
           Text(
             "We have taken on a fun project",
             style: TextStyle(
-              color: Colors.white,
+              color: Colors.black,
               fontSize: 16.0,
             ),
           ),
           MaterialButton(
-            color: Colors.white,
+            color: Colors.blueGrey,
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(10.0))),
             onPressed: () {
@@ -61,10 +65,6 @@ List<Widget> pageChildren(double width, context) {
           ),
         ],
       ),
-    ),
-    Padding(
-      padding: const EdgeInsets.symmetric(vertical: 40.0),
-      child: Image.asset('assets/images/lp_image.png', width: width),
     ),
   ];
 }
