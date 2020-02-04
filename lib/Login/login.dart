@@ -12,6 +12,7 @@ class _SignInState extends State<SignIn> {
 
   String email = '';
   String password = '';
+  String error = '';
 
   @override
   Widget build(BuildContext context) {
@@ -93,23 +94,24 @@ class _SignInState extends State<SignIn> {
                     padding: EdgeInsets.all(0.0),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(80.0)),
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/landing');
-                    }, 
-                    // async { 
-                    //   if (_formkey.currentState.validate()) {
-                    //     dynamic result = await _auth.signInWithEmailAndPassword(
-                    //         email, password);
-                    //     if (result == null) {
-                    //       print('error');
-                    //       showDialog(context: context, builder: (_) => Alert());
-                    //     } else {
-                    //       print('Signed In');
-                    //       print(result.uid);
-                    //       Navigator.pushNamed(context, '/landing');
-                    //     }
-                    //   }
-                    // },
+                    // onPressed: () {
+                    //   Navigator.pushNamed(context, '/landing');
+                    // }, 
+                      onPressed: () async { 
+                      if (_formkey.currentState.validate()) {
+                        dynamic result = await _auth.signInWithEmailAndPassword(
+                            email, password);
+                        if (result == null) {
+                          print('result $result');
+                          setState(() => error = 'This is an error');
+                        } else {
+                          print('Signed In');
+                          print('result $result');
+                          print(result.uid);
+                          Navigator.pushNamed(context, '/landing');
+                        }
+                      }
+                    },
                     child: Container(
                       width: double.infinity,
                       decoration: BoxDecoration(
@@ -131,6 +133,7 @@ class _SignInState extends State<SignIn> {
                       ),
                     ),
                   ),
+                  Text(error),
                   SizedBox(
                     height: 50.0,
                   ),
@@ -176,21 +179,3 @@ class _SignInState extends State<SignIn> {
   }
 }
 
-class Alert extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return AlertDialog(
-      title: Text('Login Alert!'),
-      content: const Text(
-          'There was an error with your E-Mail/Password combination. Please try again.'),
-      actions: <Widget>[
-        FlatButton(
-          child: Text('Ok'),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        ),
-      ],
-    );
-  }
-}
