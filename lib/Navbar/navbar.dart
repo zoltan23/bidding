@@ -58,11 +58,11 @@ class DesktopNavbar extends StatelessWidget {
                   width: 30,
                   ),
                   RaisedButton(
-                                      child: Text('Sign-Up', 
+                                      child: Text('Settings', 
                 style: TextStyle(color: Colors.white),
                 ),
                 onPressed: () {
-                  Navigator.pushNamed(context, '/signup');
+                  Navigator.pushNamed(context, '/settings');
                 },
                   ),
                  SizedBox(
@@ -131,11 +131,11 @@ class MobileNavbar extends StatelessWidget {
                 ),
                 RaisedButton(
                   child: Text(
-                                "Sign-up",
+                                "settings",
                     style: TextStyle(color: Colors.white),
                   ),
                   onPressed: () {
-                    Navigator.pushNamed(context, '/signup');
+                    Navigator.pushNamed(context, '/settings');
                   },
                 ),
               ],
