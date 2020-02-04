@@ -19,20 +19,10 @@ class _SignInState extends State<SignIn> {
       backgroundColor: Colors.brown[100],
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: Color.fromRGBO(146, 42, 42, 1.0),
         elevation: 0.0,
         title: Text('Login'),
       ),
       body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-              begin: Alignment.centerLeft,
-              end: Alignment.centerRight,
-              colors: [
-                Color.fromRGBO(195, 20, 50, 1.0),
-                Color.fromRGBO(36, 20, 50, 1.0)
-              ]),
-        ),
         padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
         child: Card(
           color: Color.fromRGBO(255, 255, 225, 1.0),
@@ -112,16 +102,6 @@ class _SignInState extends State<SignIn> {
                     // },
                     child: Container(
                       width: double.infinity,
-                      decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                              begin: Alignment.centerLeft,
-                              end: Alignment.centerRight,
-                              colors: [
-                                Color.fromRGBO(195, 20, 50, 1.0),
-                                Color.fromRGBO(36, 20, 50, 1.0)
-                              ]),
-                          borderRadius:
-                              BorderRadius.all(Radius.circular(80.0))),
                       padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
                       child: Center(
                         child: Text('Sign In',

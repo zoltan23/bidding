@@ -16,11 +16,12 @@ final List child = map<Widget>(
   imgList,
   (index, i) {
     return Container(
-      margin: EdgeInsets.all(50.0),
       child: ClipRRect(
-        borderRadius: BorderRadius.all(Radius.circular(5.0)),
         child: Stack(children: <Widget>[
-          Image.network(i, fit: BoxFit.fill, width: 600,),
+          Image.network(
+            i,
+            fit: BoxFit.fill,
+          ),
           Positioned(
             bottom: 0.0,
             left: 0.0,
@@ -28,7 +29,10 @@ final List child = map<Widget>(
             child: Container(
               decoration: BoxDecoration(
                 gradient: LinearGradient(
-                  colors: [Color.fromARGB(200, 0, 0, 0), Color.fromARGB(0, 0, 0, 0)],
+                  colors: [
+                    Color.fromARGB(200, 0, 0, 0),
+                    Color.fromARGB(0, 0, 0, 0)
+                  ],
                   begin: Alignment.bottomCenter,
                   end: Alignment.topCenter,
                 ),
@@ -71,16 +75,17 @@ class _CarouselWithIndicatorState extends State<CarouselWithIndicator> {
   Widget build(BuildContext context) {
     return Column(children: [
       CarouselSlider(
-          items: child,
-          autoPlay: true,
-          enlargeCenterPage: false,
-          aspectRatio: 2.0,
-          onPageChanged: (index) {
-            setState(() {
-      _current = index;
-            });
-          },
-        ),
+        items: child,
+        autoPlay: true,
+        viewportFraction: 1,
+        enlargeCenterPage: true,
+        aspectRatio: 2.0,
+        onPageChanged: (index) {
+          setState(() {
+            _current = index;
+          });
+        },
+      ),
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: map<Widget>(

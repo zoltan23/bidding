@@ -7,23 +7,11 @@ class LandingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-              begin: Alignment.centerLeft,
-              end: Alignment.centerRight,
-              colors: [
-                Color.fromRGBO(195, 20, 50, 1.0),
-                Color.fromRGBO(36, 20, 50, 1.0)
-              ]),
-        ),
         child: SingleChildScrollView(
           child: Column(
             children: <Widget>[
               Navbar(),
-              //SizedBox(height: 400.0, child: CarouselWithIndicator()),
-              SizedBox(
-                height: 900.0,
-                child: HomePage()),
+              HomePage(),
             ],
           ),
         ),
@@ -39,25 +27,25 @@ List<Widget> pageChildren(double width, context) {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          SizedBox(
-            height: 575.0,
-            child: CarouselWithIndicator()),
           Text(
             'Website \nDevelopers',
             style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 40.0,
-                color: Colors.white),
+                color: Colors.black),
           ),
+                    SizedBox(
+                      height: 400.0,
+                      child: CarouselWithIndicator()),
           Text(
             "We have taken on a fun project",
             style: TextStyle(
-              color: Colors.white,
+              color: Colors.black,
               fontSize: 16.0,
             ),
           ),
           MaterialButton(
-            color: Colors.white,
+            color: Colors.blueGrey,
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(10.0))),
             onPressed: () {
