@@ -6,23 +6,13 @@ class LandingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.centerLeft,
-            end: Alignment.centerRight,
-            colors: [
-              Color.fromRGBO(195, 20, 50, 1.0), 
-              Color.fromRGBO(36, 20, 50, 1.0)
-              ]),
-        ),
         child: SingleChildScrollView(
-                  child: Column(
+          child: Column(
             children: <Widget>[Navbar(), HomePage()],
           ),
         ),
-        
       ),
-      );
+    );
   }
 }
 
@@ -30,16 +20,16 @@ List<Widget> pageChildren(double width, context) {
   return <Widget>[
     Container(
       width: width,
-      child: Column(     
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
-              'Website \nDevelopers',
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 40.0,
-                  color: Colors.white),
-            ),
+            'Website \nDevelopers',
+            style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 40.0,
+                color: Colors.white),
+          ),
           Text(
             "We have taken on a fun project",
             style: TextStyle(
@@ -52,12 +42,14 @@ List<Widget> pageChildren(double width, context) {
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(10.0))),
             onPressed: () {
-                showModalBottomSheet(context: context, builder: (builder) {
-      return Container(
-        child: Text('Hello From Modal Bottom Sheet'),
-        padding: EdgeInsets.all(40.0),
-      );
-    });
+              showModalBottomSheet(
+                  context: context,
+                  builder: (builder) {
+                    return Container(
+                      child: Text('Hello From Modal Bottom Sheet'),
+                      padding: EdgeInsets.all(40.0),
+                    );
+                  });
             },
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 20.0),

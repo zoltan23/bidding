@@ -25,15 +25,6 @@ class _SignInState extends State<SignIn> {
         title: Text('Login'),
       ),
       body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-              begin: Alignment.centerLeft,
-              end: Alignment.centerRight,
-              colors: [
-                Color.fromRGBO(195, 20, 50, 1.0),
-                Color.fromRGBO(36, 20, 50, 1.0)
-              ]),
-        ),
         padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
         child: Card(
           color: Color.fromRGBO(255, 255, 225, 1.0),
@@ -94,24 +85,24 @@ class _SignInState extends State<SignIn> {
                     padding: EdgeInsets.all(0.0),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(80.0)),
-                    // onPressed: () {
-                    //   Navigator.pushNamed(context, '/landing');
-                    // }, 
-                      onPressed: () async { 
-                      if (_formkey.currentState.validate()) {
-                        dynamic result = await _auth.signInWithEmailAndPassword(
-                            email, password);
-                        if (result == null) {
-                          print('result $result');
-                          setState(() => error = 'This is an error');
-                        } else {
-                          print('Signed In');
-                          print('result $result');
-                          print(result.uid);
-                          Navigator.pushNamed(context, '/landing');
-                        }
-                      }
-                    },
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/landing');
+                    }, 
+                    //   onPressed: () async { 
+                    //   if (_formkey.currentState.validate()) {
+                    //     dynamic result = await _auth.signInWithEmailAndPassword(
+                    //         email, password);
+                    //     if (result == null) {
+                    //       print('result $result');
+                    //       setState(() => error = 'This is an error');
+                    //     } else {
+                    //       print('Signed In');
+                    //       print('result $result');
+                    //       print(result.uid);
+                    //       Navigator.pushNamed(context, '/landing');
+                    //     }
+                    //   }
+                    // },
                     child: Container(
                       width: double.infinity,
                       decoration: BoxDecoration(
