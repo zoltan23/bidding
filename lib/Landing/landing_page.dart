@@ -17,16 +17,14 @@ class LandingPage extends StatelessWidget {
               ]),
         ),
         child: SingleChildScrollView(
-          child: ConstrainedBox(
-            constraints:
-                BoxConstraints(maxHeight: MediaQuery.of(context).size.height),
-            child: Column(
-              children: <Widget>[
-                Navbar(),
-                SizedBox(height: 400.0, child: CarouselWithIndicator()),
-                Expanded(child: HomePage()),
-              ],
-            ),
+          child: Column(
+            children: <Widget>[
+              Navbar(),
+              //SizedBox(height: 400.0, child: CarouselWithIndicator()),
+              SizedBox(
+                height: 900.0,
+                child: HomePage()),
+            ],
           ),
         ),
       ),
@@ -41,6 +39,9 @@ List<Widget> pageChildren(double width, context) {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
+          SizedBox(
+            height: 575.0,
+            child: CarouselWithIndicator()),
           Text(
             'Website \nDevelopers',
             style: TextStyle(
@@ -79,10 +80,6 @@ List<Widget> pageChildren(double width, context) {
           ),
         ],
       ),
-    ),
-    Padding(
-      padding: const EdgeInsets.symmetric(vertical: 40.0),
-      child: Image.asset('assets/images/lp_image.png', width: width),
     ),
   ];
 }

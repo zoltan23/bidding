@@ -20,7 +20,7 @@ final List child = map<Widget>(
       child: ClipRRect(
         borderRadius: BorderRadius.all(Radius.circular(5.0)),
         child: Stack(children: <Widget>[
-          Image.network(i, fit: BoxFit.contain),
+          Image.network(i, fit: BoxFit.fill, width: 600,),
           Positioned(
             bottom: 0.0,
             left: 0.0,
@@ -70,19 +70,17 @@ class _CarouselWithIndicatorState extends State<CarouselWithIndicator> {
   @override
   Widget build(BuildContext context) {
     return Column(children: [
-      Expanded(
-              child: CarouselSlider(
+      CarouselSlider(
           items: child,
           autoPlay: true,
           enlargeCenterPage: false,
           aspectRatio: 2.0,
           onPageChanged: (index) {
             setState(() {
-              _current = index;
+      _current = index;
             });
           },
         ),
-      ),
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: map<Widget>(
