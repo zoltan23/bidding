@@ -9,10 +9,7 @@ class LandingPage extends StatelessWidget {
       body: Container(
         child: SingleChildScrollView(
           child: Column(
-            children: <Widget>[
-              Navbar(),
-              HomePage(),
-            ],
+            children: <Widget>[Navbar(), HomePage()],
           ),
         ),
       ),

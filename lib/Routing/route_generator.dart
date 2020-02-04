@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hello_world/Landing/landing_page.dart';
+import 'package:hello_world/Login/signup.dart';
 import '../Login/login.dart';
-import '../ListBuilder/listbuilder.dart';
 import '../ListBuilder/firebase_crud.dart';
 import '../HomePage/home_page.dart';
 
@@ -17,9 +17,10 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => MyHomePage());
       case '/landing':
         return MaterialPageRoute(builder: (_) => LandingPage());
-      
       case '/firebase':
         return MaterialPageRoute(builder: (_) => FirestoreData());
+      case '/signup':
+        return MaterialPageRoute(builder: (_) => SignUp());
       // case '/second':
       //   if (args is String) {
       //     return MaterialPageRoute(
