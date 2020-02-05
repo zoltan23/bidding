@@ -27,8 +27,8 @@ class _SettingsState extends State<Settings> {
       builder: (context, snapshot){
         print(snapshot.data.docs[0].get('firstName'));
       var firstName = snapshot.data.docs[1].get('firstName');
+      var lastName = snapshot.data.docs[1].get('lastName');
       
-
       print('titleField $firstName');
           return Scaffold(
         backgroundColor: Colors.brown[100],
@@ -39,15 +39,6 @@ class _SettingsState extends State<Settings> {
           title: Text('Settings'),
         ),
         body: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-                begin: Alignment.centerLeft,
-                end: Alignment.centerRight,
-                colors: [
-                  Color.fromRGBO(195, 20, 50, 1.0),
-                  Color.fromRGBO(36, 20, 50, 1.0)
-                ]),
-          ),
           padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
           child: Card(
             color: Color.fromRGBO(255, 255, 225, 1.0),
@@ -93,6 +84,7 @@ class _SettingsState extends State<Settings> {
                         ),
                         Expanded(
                           child: TextFormField(
+                            initialValue: '$lastName',
                               decoration: InputDecoration(
                                 contentPadding: const EdgeInsets.all(8.0),
                                 border: OutlineInputBorder(
