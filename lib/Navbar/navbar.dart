@@ -1,43 +1,47 @@
 import 'package:flutter/material.dart';
-
-
+import 'package:hello_world/models/user.dart';
+import 'package:hello_world/services/auth.dart';
+import 'package:provider/provider.dart';
 
 class Navbar extends StatelessWidget {
   @override
-  Widget build(BuildContext contest) {
-    return LayoutBuilder(
-      builder: (context, constraints){
-        if(constraints.maxWidth > 1200) {
-          return DesktopNavbar();
-        } else if(constraints.maxWidth > 800 && constraints.maxWidth < 1200) {
-          return DesktopNavbar();
-        } else {
-          return MobileNavbar();
-        }
+  Widget build(BuildContext context) {
+    return LayoutBuilder(builder: (context, constraints) {
+      if (constraints.maxWidth > 1200) {
+        return DesktopNavbar();
+      } else if (constraints.maxWidth > 800 && constraints.maxWidth < 1200) {
+        return DesktopNavbar();
+      } else {
+        return MobileNavbar();
       }
-    );
+    });
   }
 }
 
 class DesktopNavbar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<User>(context);
+    print('[navbar] user $user');
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 40),
       child: Container(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            Text('Retroportal Studio', style: TextStyle(
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
-              fontSize: 30),
+          child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+            Text(
+              'Retroportal Studio',
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                  fontSize: 30),
             ),
             Row(
               children: <Widget>[
                 RaisedButton(
-                                  child: Text('Home', 
-                  style: TextStyle(color: Colors.white),
+                  child: Text(
+                    'Home',
+                    style: TextStyle(color: Colors.white),
                   ),
                   onPressed: () {
                     Navigator.pushNamed(context, '/landing');
@@ -45,44 +49,44 @@ class DesktopNavbar extends StatelessWidget {
                 ),
                 SizedBox(
                   width: 30,
-                  ),
+                ),
                 RaisedButton(
-                                  child: Text('CRUD', 
-                  style: TextStyle(color: Colors.white),
-                                  ),
+                    child: Text(
+                      'CRUD',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/firebase');
+                    }),
+                SizedBox(
+                  width: 30,
+                ),
+                RaisedButton(
+                  child: Text(
+                    'Settings',
+                    style: TextStyle(color: Colors.white),
+                  ),
                   onPressed: () {
-                    Navigator.pushNamed(context, '/firebase');
-                  }
+                    Navigator.pushNamed(context, '/settings');
+                  },
                 ),
-                 SizedBox(
+                SizedBox(
                   width: 30,
-                  ),
-                  RaisedButton(
-                                      child: Text('Settings', 
-                style: TextStyle(color: Colors.white),
                 ),
-                onPressed: () {
-                  Navigator.pushNamed(context, '/settings');
-                },
+                RaisedButton(
+                  child: Text(
+                    'Sign Out',
+                    style: TextStyle(color: Colors.white),
                   ),
-                 SizedBox(
-                  width: 30,
-                  ),
-                  MaterialButton(
-                    color: Colors.pink,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(10.0))),
-                      onPressed: () {},
-                      child: Text(
-                        "Get Started",
-                        style: TextStyle(color: Colors.white),
-                      )
-                  )
+                  onPressed: () async {
+                    await AuthService()
+                        .signOut()
+                        .then((_) => {Navigator.pushNamed(context, '/signup')});
+                  },
+                ),
               ],
-               )
-          ]
-        )
-      ),
+            )
+          ])),
     );
   }
 }
@@ -105,22 +109,19 @@ class MobileNavbar extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 RaisedButton(
-                                  child: Text(
+                  child: Text(
                     "Home",
                     style: TextStyle(color: Colors.white),
                   ),
-                  onPressed: () {
-
-                  },
+                  onPressed: () {},
                 ),
                 SizedBox(
                   width: 30,
                 ),
                 RaisedButton(
                   child: Text(
-                                "CRUD",
+                    "CRUD",
                     style: TextStyle(color: Colors.white),
-                    
                   ),
                   onPressed: () {
                     Navigator.pushNamed(context, '/firebase');
@@ -131,11 +132,25 @@ class MobileNavbar extends StatelessWidget {
                 ),
                 RaisedButton(
                   child: Text(
-                                "settings",
+                    "settings",
                     style: TextStyle(color: Colors.white),
                   ),
                   onPressed: () {
                     Navigator.pushNamed(context, '/settings');
+                  },
+                ),
+                SizedBox(
+                  width: 30,
+                ),
+                RaisedButton(
+                  child: Text(
+                    'Sign Out',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onPressed: () async {
+                    await AuthService()
+                        .signOut()
+                        .then((_) => {Navigator.pushNamed(context, '/signup')});
                   },
                 ),
               ],

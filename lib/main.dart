@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:firebase/firebase.dart' as Firebase;
 import 'package:hello_world/Login/auth_wrapper.dart';
 import 'package:hello_world/models/user.dart';
-import 'package:hello_world/sevices/auth.dart';
+import 'package:hello_world/services/auth.dart';
 import 'Routing/route_generator.dart';
-import './sevices/firebase_init.dart';
+import './services/firebase_init.dart';
 import 'package:provider/provider.dart';
 
 Future<void> main() async {

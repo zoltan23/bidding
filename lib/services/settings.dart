@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hello_world/sevices/auth.dart';
+import 'package:hello_world/services/auth.dart';
 import 'package:firebase/firebase.dart' as fb;
 import 'package:firebase/firestore.dart' as fs;
 

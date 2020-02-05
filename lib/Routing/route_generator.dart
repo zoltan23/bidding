@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hello_world/Landing/landing_page.dart';
 import 'package:hello_world/Login/auth_wrapper.dart';
 import 'package:hello_world/Login/signup.dart';
-import 'package:hello_world/sevices/settings.dart';
+import 'package:hello_world/services/settings.dart';
 import '../Login/login.dart';
 import '../ListBuilder/firebase_crud.dart';
 import '../HomePage/home_page.dart';

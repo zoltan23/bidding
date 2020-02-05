@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hello_world/sevices/auth.dart';
+import 'package:hello_world/services/auth.dart';
 import 'package:firebase/firebase.dart' as fb;
 import 'package:firebase/firestore.dart' as fs;
 
@@ -28,15 +28,6 @@ class _SignUpState extends State<SignUp> {
         title: Text('Sign Up'),
       ),
       body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-              begin: Alignment.centerLeft,
-              end: Alignment.centerRight,
-              colors: [
-                Color.fromRGBO(195, 20, 50, 1.0),
-                Color.fromRGBO(36, 20, 50, 1.0)
-              ]),
-        ),
         padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
         child: Card(
           color: Color.fromRGBO(255, 255, 225, 1.0),
