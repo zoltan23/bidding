@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:firebase/firebase.dart' as Firebase;
+import 'package:hello_world/Login/auth_wrapper.dart';
+import 'package:hello_world/models/user.dart';
+import 'package:hello_world/sevices/auth.dart';
 import 'Routing/route_generator.dart';
 import './sevices/firebase_init.dart';
+import 'package:provider/provider.dart';
 
 Future<void> main() async {
   if (Firebase.apps.isEmpty) {
@@ -14,23 +18,21 @@ Future<void> main() async {
         storageBucket: STORAGE_BUCKET,
         messagingSenderId: MESSAGING_SENDER_ID,
         appId: APP_ID,
-        measurementId: MEASUREMENT_ID
-        );
-}
-    runApp(MyApp());
+        measurementId: MEASUREMENT_ID);
+  }
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
-  
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      
-      theme: ThemeData(primarySwatch: Colors.blue, fontFamily: "Montserrat"),
-      initialRoute: '/',
-      onGenerateRoute: RouteGenerator.generateRoute,
+    return StreamProvider<User>.value(
+        value: AuthService().user,
+        child: MaterialApp(
+          initialRoute: '/',
+          onGenerateRoute: RouteGenerator.generateRoute,
+          home: AuthWrapper(),
+        ),
     );
   }
 }

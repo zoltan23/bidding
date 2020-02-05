@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:hello_world/carousel.dart';
 import '../Navbar/navbar.dart';
+import 'package:hello_world/models/user.dart';
+import 'package:provider/provider.dart';
+
 
 class LandingPage extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
+    final  user = Provider.of<User>(context);
+    print('landing $user');
     return Scaffold(
       body: Container(
         child: SingleChildScrollView(

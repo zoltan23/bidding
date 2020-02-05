@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hello_world/Landing/landing_page.dart';
+import 'package:hello_world/Login/auth_wrapper.dart';
 import 'package:hello_world/Login/signup.dart';
 import 'package:hello_world/sevices/settings.dart';
 import '../Login/login.dart';
@@ -12,7 +13,7 @@ class RouteGenerator {
 
     switch (settings.name) {
       case '/':
-        return MaterialPageRoute(builder: (_) => SignIn());
+        return MaterialPageRoute(builder: (_) => AuthWrapper());
       case '/home':
         return MaterialPageRoute(builder: (_) => MyHomePage());
       case '/landing':

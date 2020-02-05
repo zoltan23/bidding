@@ -12,8 +12,6 @@ class UserList {
 
 }
 
-
-
 class UserData {
 
   final String firstName;
