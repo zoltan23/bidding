@@ -32,7 +32,7 @@
 
 # Web related
 lib/generated_plugin_registrant.dart
-lib/services/firebase_creds.dart
+lib/services/firebase_init.dart
 
 
 
