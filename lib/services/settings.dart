@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:hello_world/services/auth.dart';
 import 'package:firebase/firebase.dart' as fb;
 import 'package:firebase/firestore.dart' as fs;
+import 'package:hello_world/models/user.dart';
+import 'package:provider/provider.dart';
 
 fs.Firestore firestore = fb.firestore();
 fs.CollectionReference ref = firestore.collection('users');
@@ -22,12 +24,15 @@ class _SettingsState extends State<Settings> {
   
   Widget build(BuildContext context) {
  
+    final user = Provider.of<User>(context);
+
     return StreamBuilder(
       stream: firestore.collection('users').onSnapshot,
       builder: (context, snapshot){
         print(snapshot.data.docs[0].get('firstName'));
-      var firstName = snapshot.data.docs[1].get('firstName');
-      var lastName = snapshot.data.docs[1].get('lastName');
+      var firstName = snapshot.data.docs[0].get('firstName');
+      var lastName = snapshot.data.docs[0].get('lastName');
+      var email = user.email;
       
       print('titleField $firstName');
           return Scaffold(
@@ -109,6 +114,7 @@ class _SettingsState extends State<Settings> {
 
                     //Email
                     TextFormField(
+                        initialValue: '$email',
                         decoration: InputDecoration(
                           prefixIcon: Icon(Icons.person),
                           contentPadding: const EdgeInsets.all(8.0),
@@ -164,13 +170,6 @@ class _SettingsState extends State<Settings> {
                       child: Container(
                         width: double.infinity,
                         decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                                begin: Alignment.centerLeft,
-                                end: Alignment.centerRight,
-                                colors: [
-                                  Color.fromRGBO(195, 20, 50, 1.0),
-                                  Color.fromRGBO(36, 20, 50, 1.0)
-                                ]),
                             borderRadius:
                                 BorderRadius.all(Radius.circular(80.0))),
                         padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
@@ -212,8 +211,3 @@ class _SettingsState extends State<Settings> {
       });
   }
 }
-
-
-
-
-

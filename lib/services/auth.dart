@@ -4,9 +4,9 @@ import '../models/user.dart';
 class AuthService {
   
   final FirebaseAuth _auth = FirebaseAuth.instance;
-
+  
   User _userFromFirebaseUser(FirebaseUser user) {
-    return user != null ? User(uid: user.uid) : null;
+    return user != null ? User(uid: user.uid, email: user.email) : null;
   }
 
   Stream<User> get user {
@@ -18,6 +18,7 @@ class AuthService {
     try {
       FirebaseUser user = await FirebaseAuth.instance.currentUser();
       print(user);
+      return user;
     } catch (e) {
       print(e.toString());
       return null;
@@ -38,7 +39,6 @@ class AuthService {
   }
 
   // sign in with email and password
-
   Future signInWithEmailAndPassword(String email, String password) async {
     try {
       AuthResult result = await _auth.signInWithEmailAndPassword(
@@ -46,8 +46,8 @@ class AuthService {
       FirebaseUser user = result.user;
       return _userFromFirebaseUser(user);
     } catch (error) {
-      print(error.toString());
-      return null;
+      print(error.code);
+      return error.toString();
     }
   }
 
@@ -56,10 +56,19 @@ class AuthService {
     try {
       AuthResult result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
       print(result);
-    } catch(e)  {
-      print(e);
+    } catch(error)  {
+      print(error);
+      return error.toString();
     }
   }
+
+Future sendPasswordResetEmail(String email) async {
+   try {
+     await _auth.sendPasswordResetEmail(email: email);
+   } catch(e){
+     print(e);
+   }
+ }
 
   // sign out
   Future signOut() async {
@@ -69,6 +78,5 @@ class AuthService {
       print(e);
       return null;
     }
-    
   }
 }

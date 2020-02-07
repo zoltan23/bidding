@@ -81,7 +81,7 @@ class DesktopNavbar extends StatelessWidget {
                   onPressed: () async {
                     await AuthService()
                         .signOut()
-                        .then((_) => {Navigator.pushNamed(context, '/signup')});
+                        .then((_) => {Navigator.pushNamed(context, '/signin')});
                   },
                 ),
               ],
@@ -105,7 +105,7 @@ class MobileNavbar extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.all(12.0),
-            child: Row(
+            child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 RaisedButton(
@@ -150,7 +150,7 @@ class MobileNavbar extends StatelessWidget {
                   onPressed: () async {
                     await AuthService()
                         .signOut()
-                        .then((_) => {Navigator.pushNamed(context, '/signup')});
+                        .then((_) => {Navigator.pushNamed(context, '/signin')});
                   },
                 ),
               ],

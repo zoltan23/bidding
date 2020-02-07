@@ -30,7 +30,6 @@ class _SignInState extends State<SignIn> {
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(18.0)),
           child: Form(
-    
             key: _formkey,
             child: Padding(
               padding: const EdgeInsets.all(30.0),
@@ -88,19 +87,20 @@ class _SignInState extends State<SignIn> {
                     // onPressed: () {
                     //   Navigator.pushNamed(context, '/landing');
 
-                    // }, 
-                      onPressed: () async { 
+                    // },
+                    onPressed: () async {
                       if (_formkey.currentState.validate()) {
                         dynamic result = await _auth.signInWithEmailAndPassword(
                             email, password);
-                        if (result == null) {
-
+                        if (result is String) {
                           print('result $result');
-                          setState(() => error = 'This is an error');
+                          setState(() => error = result);
                         } else {
                           print('Signed In');
                           print('result $result');
-                          print(result.uid);
+                          //dynamic getUser = await _auth.getCurrentUser();
+                          //print(getUser.password);
+                          print('password');
                           Navigator.pushNamed(context, '/landing');
                         }
                       }
@@ -116,7 +116,13 @@ class _SignInState extends State<SignIn> {
                       ),
                     ),
                   ),
-                  Text(error),
+                  Text(
+                    error,
+                    style: TextStyle(
+                      color: Colors.red,
+                      fontSize: 20.0,
+                    ),
+                  ),
                   SizedBox(
                     height: 50.0,
                   ),
@@ -141,7 +147,9 @@ class _SignInState extends State<SignIn> {
                   Expanded(
                     child: Align(
                         alignment: Alignment(0, .85),
-                        child: Text("Or Sign Up Using")),
+                        child: Text("Or Sign Up Here:",
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),)
                   ),
                   GestureDetector(
                       child: Text("Sign Up",
@@ -161,4 +169,3 @@ class _SignInState extends State<SignIn> {
     );
   }
 }
-

@@ -15,7 +15,12 @@ class _SignUpState extends State<SignUp> {
   final AuthService _auth = AuthService();
   final _formkey = GlobalKey<FormState>();
 
-  String email = '', password = '', firstName = '', lastName = '', error = '';
+  String  email = '', 
+          choosePassword = '', 
+          confirmPassword = '',
+          firstName = '', 
+          lastName = '', 
+          error = '';
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +28,6 @@ class _SignUpState extends State<SignUp> {
       backgroundColor: Colors.brown[100],
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: Color.fromRGBO(146, 42, 42, 1.0),
         elevation: 0.0,
         title: Text('Sign Up'),
       ),
@@ -39,17 +43,23 @@ class _SignUpState extends State<SignUp> {
               padding: const EdgeInsets.all(30.0),
               child: Column(
                 children: <Widget>[
-                  Row(children: <Widget>[
-                    Expanded(child: Align(
-                      alignment: Alignment(-.98, .95),
-                      child: SizedBox(child: Text("First Name")))),
-                    Expanded(child: Align(
-                      alignment: Alignment(-.96, .95),
-                      child: SizedBox(child: Text("Last Name")))),
-                  ],),
+                  Row(
+                    children: <Widget>[
+                      Expanded(
+                          child: Align(
+                              alignment: Alignment(-.98, .95),
+                              child: SizedBox(child: Text("First Name")))),
+                      Expanded(
+                          child: Align(
+                              alignment: Alignment(-.96, .95),
+                              child: SizedBox(child: Text("Last Name")))),
+                    ],
+                  ),
 
                   Row(
                     children: <Widget>[
+
+                      //First Name
                       Expanded(
                         child: TextFormField(
                             decoration: InputDecoration(
@@ -110,14 +120,14 @@ class _SignUpState extends State<SignUp> {
                       onChanged: (val) {
                         setState(() => email = val.trim());
                       }),
+
+                  //Choose Password
                   SizedBox(
                     height: 30.0,
                     child: Align(
                         alignment: Alignment(-.99, .95),
-                        child: Text("Password")),
+                        child: Text("Choose Password")),
                   ),
-
-                  //Password
                   TextFormField(
                       decoration: InputDecoration(
                         prefixIcon: Icon(Icons.lock),
@@ -133,8 +143,40 @@ class _SignUpState extends State<SignUp> {
                           : null,
                       obscureText: true,
                       onChanged: (val) {
-                        setState(() => password = val.trim());
+                        setState(() => choosePassword = val.trim());
                       }),
+
+                      //Confirm Password
+                       SizedBox(
+                    height: 30.0,
+                    child: Align(
+                        alignment: Alignment(-.99, .95),
+                        child: Text("Confirm Password")),
+                  ),
+                       TextFormField(
+                      decoration: InputDecoration(
+                        prefixIcon: Icon(Icons.lock),
+                        contentPadding: const EdgeInsets.all(8.0),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(5.0),
+                        ),
+                        hintText: "Password",
+                        errorStyle: TextStyle(color: Colors.red),
+                      ),
+                      validator: (val) => val.length < 6
+                          ? 'Enter a password 6+ chars long'
+                          : null,
+                      obscureText: true,
+                      onChanged: (val) {
+                        setState(() => confirmPassword = val.trim());
+                      }),
+                  Text(
+                    error,
+                    style: TextStyle(
+                      color: Colors.red,
+                      fontSize: 20.0,
+                    ),
+                  ),
                   SizedBox(height: 20.0),
                   RaisedButton(
                     textColor: Colors.white,
@@ -142,22 +184,14 @@ class _SignUpState extends State<SignUp> {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(80.0)),
                     onPressed: () {
-                      if (_formkey.currentState.validate()) {
+                      if (_formkey.currentState.validate() && (choosePassword == confirmPassword)) {
                         handleSignUp();
+                      } else if(choosePassword != confirmPassword) {
+                        setState(() => error = 'Passwords do not match!');
                       }
                     },
                     child: Container(
                       width: double.infinity,
-                      decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                              begin: Alignment.centerLeft,
-                              end: Alignment.centerRight,
-                              colors: [
-                                Color.fromRGBO(195, 20, 50, 1.0),
-                                Color.fromRGBO(36, 20, 50, 1.0)
-                              ]),
-                          borderRadius:
-                              BorderRadius.all(Radius.circular(80.0))),
                       padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
                       child: Center(
                         child: Text('Sign Up',
@@ -187,7 +221,7 @@ class _SignUpState extends State<SignUp> {
                         ],
                       ),
                     ),
-                  ),          
+                  ),
                 ],
               ),
             ),
@@ -198,38 +232,20 @@ class _SignUpState extends State<SignUp> {
   }
 
   void handleSignUp() async {
-    dynamic result = await _auth.registerWithEmailAndPassword(email, password);
-    if (result == null) {
-      print(error);
-      showDialog(context: context, builder: (_) => Alert());
-      setState(() => error = error);
+    dynamic result = await _auth.registerWithEmailAndPassword(email, confirmPassword);
+    if (result is String) {
+      print('error $result');
+      setState(() => error = result);
     } else {
-      ref.add({
-        'firstName': '$firstName',
-        'lastName': '$lastName',
-      });
-      setState(() {
-      firstName = '';
-      });
+      print('handleSignup $result');
+      // ref.add({
+      //   'firstName': '$firstName',
+      //   'lastName': '$lastName',
+      // });
+      // setState(() {
+      //   firstName = '';
+      // });
     }
   }
 }
 
-class Alert extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return AlertDialog(
-      title: Text('Login Alert!'),
-      content: const Text(
-          'There was an error with your E-Mail/Password combination. Please try again.'),
-      actions: <Widget>[
-        FlatButton(
-          child: Text('Ok'),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        ),
-      ],
-    );
-  }
-}

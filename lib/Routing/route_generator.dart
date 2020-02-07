@@ -24,6 +24,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => SignUp());
       case '/settings':
         return MaterialPageRoute(builder: (_) => Settings());  
+      case '/signin':
+        return MaterialPageRoute(builder: (_) => SignIn());  
       // case '/second':
       //   if (args is String) {
       //     return MaterialPageRoute(
