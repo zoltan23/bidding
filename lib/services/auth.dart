@@ -56,6 +56,7 @@ class AuthService {
     try {
       AuthResult result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
       print(result);
+      return result;
     } catch(error)  {
       print(error);
       return error.toString();
