@@ -6,7 +6,6 @@ import 'listbuilder.dart';
 import '../Navbar/navbar.dart';
 import '../models/user.dart';
 import 'listbuilder.dart';
-import 'package:hello_world/models/user.dart';
 import 'package:provider/provider.dart';
 
 

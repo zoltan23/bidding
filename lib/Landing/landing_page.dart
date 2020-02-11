@@ -6,7 +6,6 @@ import 'package:provider/provider.dart';
 
 
 class LandingPage extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     final  user = Provider.of<User>(context);
@@ -45,28 +44,6 @@ List<Widget> pageChildren(double width, context) {
             style: TextStyle(
               color: Colors.black,
               fontSize: 16.0,
-            ),
-          ),
-          MaterialButton(
-            color: Colors.blueGrey,
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(10.0))),
-            onPressed: () {
-              showModalBottomSheet(
-                  context: context,
-                  builder: (builder) {
-                    return Container(
-                      child: Text('Hello From Modal Bottom Sheet'),
-                      padding: EdgeInsets.all(40.0),
-                    );
-                  });
-            },
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 20.0),
-              child: Text('Modal',
-                  style: TextStyle(
-                    fontSize: 16.0,
-                  )),
             ),
           ),
         ],

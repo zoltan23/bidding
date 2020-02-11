@@ -97,10 +97,6 @@ class _SignInState extends State<SignIn> {
                           setState(() => error = result);
                         } else {
                           print('Signed In');
-                          print('result $result');
-                          //dynamic getUser = await _auth.getCurrentUser();
-                          //print(getUser.password);
-                          print('password');
                           Navigator.pushNamed(context, '/landing');
                         }
                       }
@@ -116,11 +112,14 @@ class _SignInState extends State<SignIn> {
                       ),
                     ),
                   ),
-                  Text(
-                    error,
-                    style: TextStyle(
-                      color: Colors.red,
-                      fontSize: 20.0,
+                  Padding(
+                    padding: const EdgeInsets.only(top: 15.0),
+                    child: Text(
+                      error,
+                      style: TextStyle(
+                        color: Colors.red,
+                        fontSize: 20.0,
+                      ),
                     ),
                   ),
                   SizedBox(
@@ -133,7 +132,6 @@ class _SignInState extends State<SignIn> {
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Row(
-                        //crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Icon(
