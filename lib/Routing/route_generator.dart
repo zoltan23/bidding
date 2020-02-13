@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hello_world/Landing/landing_page.dart';
 import 'package:hello_world/Login/auth_wrapper.dart';
+import 'package:hello_world/Login/reset.dart';
 import 'package:hello_world/Login/signup.dart';
 import 'package:hello_world/services/settings.dart';
 import '../Login/login.dart';
@@ -26,6 +27,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => Settings());  
       case '/signin':
         return MaterialPageRoute(builder: (_) => SignIn());  
+      case '/reset':
+        return MaterialPageRoute(builder: (_) => Reset());  
       // case '/second':
       //   if (args is String) {
       //     return MaterialPageRoute(

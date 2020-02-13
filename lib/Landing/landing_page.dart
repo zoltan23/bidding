@@ -4,7 +4,6 @@ import '../Navbar/navbar.dart';
 import 'package:hello_world/models/user.dart';
 import 'package:provider/provider.dart';
 
-
 class LandingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

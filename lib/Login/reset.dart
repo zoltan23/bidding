@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:hello_world/services/auth.dart';
 
-class SignIn extends StatefulWidget {
+class Reset extends StatefulWidget {
   @override
-  _SignInState createState() => _SignInState();
+  _ResetState createState() => _ResetState();
 }
 
-class _SignInState extends State<SignIn> {
+class _ResetState extends State<Reset> {
   final AuthService _auth = AuthService();
   final _formkey = GlobalKey<FormState>();
 
   String email = '';
-  String password = '';
   String error = '';
 
   @override
@@ -21,7 +20,7 @@ class _SignInState extends State<SignIn> {
       appBar: AppBar(
         centerTitle: true,
         elevation: 0.0,
-        title: Text('Login'),
+        title: Text('Reset Password'),
       ),
       body: Container(
         padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
@@ -55,64 +54,37 @@ class _SignInState extends State<SignIn> {
                       onChanged: (val) {
                         setState(() => email = val.trim());
                       }),
-                  SizedBox(
-                    height: 30.0,
-                    child: Align(
-                        alignment: Alignment(-.99, .95),
-                        child: Text("Password")),
-                  ),
-                  TextFormField(
-                      decoration: InputDecoration(
-                        prefixIcon: Icon(Icons.lock),
-                        contentPadding: const EdgeInsets.all(8.0),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(5.0),
-                        ),
-                        hintText: "Password",
-                        errorStyle: TextStyle(color: Colors.red),
-                      ),
-                      validator: (val) => val.length < 6
-                          ? 'Enter a password 6+ chars long'
-                          : null,
-                      obscureText: true,
-                      onChanged: (val) {
-                        setState(() => password = val.trim());
-                      }),
                   SizedBox(height: 20.0),
                   RaisedButton(
                     textColor: Colors.white,
                     padding: EdgeInsets.all(0.0),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(80.0)),
-                    // onPressed: () {
-                    //   Navigator.pushNamed(context, '/landing');
-
-                    // },
                     onPressed: () async {
                       if (_formkey.currentState.validate()) {
-                        dynamic result = await _auth.signInWithEmailAndPassword(
-                            email, password);
+                        dynamic result = await _auth.sendPasswordResetEmail(email);
                         if (result is String) {
                           print('result $result');
                           setState(() => error = result);
                         } else {
-                          print('Signed In');
-                          Navigator.pushNamed(context, '/landing');
+                          print('Password Email Sent!');
+                          showDialog(context: context, builder: (_) => Alert());
                         }
                       }
+                      //Navigator.pushNamed(context, '/signin');
                     },
                     child: Container(
                       width: double.infinity,
                       padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
                       child: Center(
-                        child: Text('Sign In',
+                        child: Text('Send Password Reset Email',
                             style: TextStyle(
                               fontSize: 20,
                             )),
                       ),
                     ),
                   ),
-                  Padding(
+                   Padding(
                     padding: const EdgeInsets.only(top: 15.0),
                     child: Text(
                       error,
@@ -122,38 +94,6 @@ class _SignInState extends State<SignIn> {
                       ),
                     ),
                   ),
-                  SizedBox(
-                    child: gestureDetector(context, 'Forgot Password?', '/reset'),
-                  ),
-                  SizedBox(
-                    height: 50.0,
-                  ),
-                  SizedBox(
-                    child: Text("Or Sign In Using"),
-                  ),
-                  SizedBox(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Icon(
-                            Icons.face,
-                            size: 40.0,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                      child: Align(
-                    alignment: Alignment(0, .85),
-                    child: Text(
-                      "Or Sign Up Here:",
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                  )),
-                  gestureDetector(context, 'Sign Up',  '/signup'),
                 ],
               ),
             ),
@@ -164,14 +104,21 @@ class _SignInState extends State<SignIn> {
   }
 }
 
-Widget gestureDetector(context, String purpose, String route) {
-  return GestureDetector(
-      child: Text(purpose,
-          style: TextStyle(
-              fontSize: 18.0,
-              decoration: TextDecoration.underline,
-              color: Colors.blue)),
-      onTap: () {
-        Navigator.pushNamed(context, route);
-      });
+class Alert extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: Text('Login Alert!'),
+      content:  Text(
+          'An email has been sent to you with password reset instructions.  Click OK to proceed to the login page.'),
+      actions: <Widget>[
+        FlatButton(
+          child: Text('Ok'),
+          onPressed: () {
+           Navigator.pushNamed(context, '/signin');
+          },
+        ),
+      ],
+    );
+  }
 }
