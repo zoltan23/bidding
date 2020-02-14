@@ -1,0 +1,17 @@
+{
+  "login": {
+      "title": "English",
+      "email": "EN email",
+      "password": "EN password",
+      "login": "EN login",
+      "signIn": "EN signin",
+      "forgotPassword": "EN Forgot password?",
+      "orSignInUsing": "EN Or sign in Using",
+      "orSignUpHere": "EN Or sign up here",
+      "signUp": "EN Sign up"
+  },
+  "validation": {
+      "validEmail": "EN Enter a valid email",
+      "validPassword": "EN Enter a password 6+ chars long"
+  }
+}

@@ -6,6 +6,10 @@ import 'package:hello_world/services/auth.dart';
 import 'Routing/route_generator.dart';
 import './services/firebase_init.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:easy_localization/easy_localization.dart';
+//import 'package:i18n_easy_localization/page2.dart';
+
 
 Future<void> main() async {
   if (Firebase.apps.isEmpty) {
@@ -20,19 +24,33 @@ Future<void> main() async {
         appId: APP_ID,
         measurementId: MEASUREMENT_ID);
   }
-  runApp(MyApp());
+  runApp(EasyLocalization(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return StreamProvider<User>.value(
-        value: AuthService().user,
-        child: MaterialApp(
-          initialRoute: '/',
-          onGenerateRoute: RouteGenerator.generateRoute,
-          home: AuthWrapper(),
-        ),
+    var data = EasyLocalizationProvider.of(context).data;
+    return EasyLocalizationProvider(
+      data: data,
+          child: StreamProvider<User>.value(
+          value: AuthService().user,
+          child: MaterialApp(
+            localizationsDelegates: [
+              GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          //app-specific localization
+          EasyLocalizationDelegate(
+              locale: data.locale,
+              path: 'langs'),
+            ],
+            supportedLocales: [Locale('en', 'US'), Locale('es', 'MX')],
+            locale: data.savedLocale,
+            initialRoute: '/',
+            onGenerateRoute: RouteGenerator.generateRoute,
+            home: AuthWrapper(),
+          ),
+      ),
     );
   }
 }

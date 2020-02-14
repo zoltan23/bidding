@@ -1,0 +1,17 @@
+{
+    "login": {
+        "title": "Espanol Login",
+        "email": "ES email",
+        "password": "ES password",
+        "login": "ES login",
+        "signIn": "ES signin",
+        "forgotPassword": "ES Forgot password?",
+        "orSignInUsing": "ES Or sign in Using",
+        "orSignUpHere": "ES Or sign up here",
+        "signUp": "ES Sign up"
+    },
+    "validation": {
+        "email": "ES Enter a valid email",
+        "password": "ES Enter a password 6+ chars long"
+    }
+  }
