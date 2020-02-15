@@ -11,7 +11,25 @@
         "signUp": "ES Sign up"
     },
     "validation": {
+        "firstName": "ES Enter a valid first name.",
+        "lastName": "ES Enter a valid last name.",
         "email": "ES Enter a valid email",
         "password": "ES Enter a password 6+ chars long"
-    }
+    },
+    "signUp": {
+        "title": "ES Sign up",
+        "firstName": "ES First Name",
+        "lastName": "ES Last Name",
+        "email": "ES email",
+        "choosePassword": "ES Choose Password",
+        "confirmPassword": "ES Confirm Password",
+        "signUp": "ES Sign Up",
+        "orSignInUsing": "ES EN Or sign in Using"
+      },
+      "navbar": {
+        "home": "ES Home",
+        "crud": "ES CRUD",
+        "settings": "ES Settings",
+        "signOut": "ES Sign Out"
+      }
   }

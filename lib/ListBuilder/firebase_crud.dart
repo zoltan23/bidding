@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase/firebase.dart' as fb;
 import 'package:firebase/firestore.dart' as fs;
+import 'package:hello_world/services/auth.dart';
 import 'listbuilder.dart';
 import '../Navbar/navbar.dart';
 import '../models/user.dart';
@@ -9,13 +10,14 @@ import 'listbuilder.dart';
 import 'package:provider/provider.dart';
 
 
+
 fs.Firestore firestore = fb.firestore();
-fs.CollectionReference ref = firestore.collection('books');
+fs.CollectionReference ref = firestore.collection('users');
 
 List<Map<String, dynamic>> docs = [];
 
-void createRecord() async {
-  ref.add({
+void createRecord(String uid) async {
+  ref.doc(uid).set({
     'description': 'this is a description',
     'title': 'It is working now!!!!'
   });
@@ -58,7 +60,7 @@ class FirestoreData extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
      final  user = Provider.of<User>(context);
-     print('firebase crud $user');
+     print('firebase crud ${user.uid}');
     return Scaffold(
       body: Container(
         child: Column(
@@ -67,7 +69,7 @@ class FirestoreData extends StatelessWidget {
             RaisedButton(
               child: Text('Create Record'),
               onPressed: () {
-                createRecord();
+                createRecord(user.uid);
               },
             ),
             RaisedButton(

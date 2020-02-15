@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:hello_world/models/user.dart';
 import 'package:hello_world/services/auth.dart';
 import 'package:provider/provider.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class Navbar extends StatelessWidget {
   @override
@@ -22,6 +24,7 @@ class DesktopNavbar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<User>(context);
+    var data = EasyLocalizationProvider.of(context).data;
     print('[navbar] user $user');
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 40),
@@ -40,7 +43,7 @@ class DesktopNavbar extends StatelessWidget {
               children: <Widget>[
                 RaisedButton(
                   child: Text(
-                    'Home',
+                    translatedText(context, 'navbar.home'),
                     style: TextStyle(color: Colors.white),
                   ),
                   onPressed: () {
@@ -52,18 +55,16 @@ class DesktopNavbar extends StatelessWidget {
                 ),
                 RaisedButton(
                     child: Text(
-                      'CRUD',
+                      translatedText(context, 'navbar.crud'),
                       style: TextStyle(color: Colors.white),
                     ),
                     onPressed: () {
                       Navigator.pushNamed(context, '/firebase');
                     }),
-                SizedBox(
-                  width: 30,
-                ),
+                SizedBox(width: 30),
                 RaisedButton(
                   child: Text(
-                    'Settings',
+                    translatedText(context, 'navbar.settings'),
                     style: TextStyle(color: Colors.white),
                   ),
                   onPressed: () {
@@ -75,12 +76,14 @@ class DesktopNavbar extends StatelessWidget {
                 ),
                 RaisedButton(
                   child: Text(
-                    'Sign Out',
+                    translatedText(context, 'navbar.signOut'),
                     style: TextStyle(color: Colors.white),
                   ),
                   onPressed: () async {
                     await AuthService()
                         .signOut()
+                        // .then((value) => showDialog(
+                        //     context: context, builder: (_) => Alert()))
                         .then((_) => {Navigator.pushNamed(context, '/signin')});
                   },
                 ),
@@ -110,7 +113,7 @@ class MobileNavbar extends StatelessWidget {
               children: <Widget>[
                 RaisedButton(
                   child: Text(
-                    "Home",
+                    translatedText(context, 'navbar.home'),
                     style: TextStyle(color: Colors.white),
                   ),
                   onPressed: () {},
@@ -120,7 +123,7 @@ class MobileNavbar extends StatelessWidget {
                 ),
                 RaisedButton(
                   child: Text(
-                    "CRUD",
+                    translatedText(context, 'navbar.crud'),
                     style: TextStyle(color: Colors.white),
                   ),
                   onPressed: () {
@@ -132,7 +135,7 @@ class MobileNavbar extends StatelessWidget {
                 ),
                 RaisedButton(
                   child: Text(
-                    "settings",
+                    translatedText(context, 'navbar.settings'),
                     style: TextStyle(color: Colors.white),
                   ),
                   onPressed: () {
@@ -144,12 +147,14 @@ class MobileNavbar extends StatelessWidget {
                 ),
                 RaisedButton(
                   child: Text(
-                    'Sign Out',
+                    translatedText(context, 'navbar.signOut'),
                     style: TextStyle(color: Colors.white),
                   ),
                   onPressed: () async {
                     await AuthService()
                         .signOut()
+                        // .then((value) => showDialog(
+                        //     context: context, builder: (_) => Alert()))
                         .then((_) => {Navigator.pushNamed(context, '/signin')});
                   },
                 ),
@@ -159,5 +164,32 @@ class MobileNavbar extends StatelessWidget {
         ]),
       ),
     );
+  }
+}
+
+String translatedText(context, String json) {
+  return AppLocalizations.of(context).tr(json);
+}
+
+class Alert extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return SpinKitRotatingCircle(
+      duration: Duration(milliseconds: 3000),
+  color: Colors.white,
+  size: 50.0,
+);
+    // return AlertDialog(
+    //   title: Text('Congratulations!'),
+    //   content: const Text('You have been successfully signed out!'),
+    //   actions: <Widget>[
+    //     FlatButton(
+    //       child: Text('Ok'),
+    //       onPressed: () {
+    //         Navigator.pushNamed(context, '/signin');
+    //       },
+    //     ),
+    //   ],
+    // );
   }
 }

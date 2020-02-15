@@ -10,6 +10,7 @@ class LandingPage extends StatelessWidget {
     final  user = Provider.of<User>(context);
     print('landing $user');
     return Scaffold(
+      backgroundColor: Colors.brown[100],
       body: Container(
         child: SingleChildScrollView(
           child: Column(

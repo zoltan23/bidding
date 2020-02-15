@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:hello_world/services/auth.dart';
 import 'package:firebase/firebase.dart' as fb;
 import 'package:firebase/firestore.dart' as fs;
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'dart:async';
+import '../UI/select_language.dart';
 
 fs.Firestore firestore = fb.firestore();
 fs.CollectionReference ref = firestore.collection('users');
@@ -22,16 +24,21 @@ class _SignUpState extends State<SignUp> {
           confirmPassword = '',
           firstName = '', 
           lastName = '', 
+          signUpTimeStamp = '',
           error = '';
 
   @override
   Widget build(BuildContext context) {
+    var data = EasyLocalizationProvider.of(context).data;
     return Scaffold(
       backgroundColor: Colors.brown[100],
       appBar: AppBar(
+        actions: <Widget>[
+          SelectLanguage(),
+        ],
         centerTitle: true,
         elevation: 0.0,
-        title: Text('Sign Up'),
+        title: Text(translatedText(context, 'signUp.title')),
       ),
       body: SingleChildScrollView(
               child: Container(
@@ -51,11 +58,11 @@ class _SignUpState extends State<SignUp> {
                         Expanded(
                             child: Align(
                                 alignment: Alignment(-.98, .95),
-                                child: SizedBox(child: Text("First Name")))),
+                                child: SizedBox(child: Text(translatedText(context, 'signUp.firstName'))))),
                         Expanded(
                             child: Align(
                                 alignment: Alignment(-.96, .95),
-                                child: SizedBox(child: Text("Last Name")))),
+                                child: SizedBox(child: Text(translatedText(context, 'signUp.lastName'))))),
                       ],
                     ),
 
@@ -70,11 +77,11 @@ class _SignUpState extends State<SignUp> {
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(5.0),
                                 ),
-                                hintText: "First Name",
+                                hintText: translatedText(context, 'signUp.firstName'),
                                 errorStyle: TextStyle(color: Colors.red),
                               ),
                               validator: (val) => val.isEmpty
-                                  ? 'Enter a valid first name.'
+                                  ? translatedText(context, 'validation.firstName')
                                   : null,
                               onChanged: (val) {
                                 setState(() => firstName = val.trim());
@@ -90,11 +97,11 @@ class _SignUpState extends State<SignUp> {
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(5.0),
                                 ),
-                                hintText: "Last Name",
+                                hintText: translatedText(context, 'signUp.lastName'),
                                 errorStyle: TextStyle(color: Colors.red),
                               ),
                               validator: (val) =>
-                                  val.isEmpty ? 'Enter a valid last name.' : null,
+                                  val.isEmpty ? translatedText(context, 'validation.lastName') : null,
                               onChanged: (val) {
                                 setState(() => lastName = val.trim());
                               }),
@@ -104,7 +111,7 @@ class _SignUpState extends State<SignUp> {
                     SizedBox(
                       height: 60.0,
                       child: Align(
-                          alignment: Alignment(-.99, .95), child: Text("Email")),
+                          alignment: Alignment(-.99, .95), child: Text(translatedText(context, 'signUp.email'))),
                     ),
 
                     //Email
@@ -115,11 +122,11 @@ class _SignUpState extends State<SignUp> {
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(5.0),
                           ),
-                          hintText: "Email",
+                          hintText: translatedText(context, 'signUp.email'),
                           errorStyle: TextStyle(color: Colors.red),
                         ),
                         validator: (val) =>
-                            val.isEmpty ? 'Enter a valid email.' : null,
+                            val.isEmpty ? translatedText(context, 'validation.email') : null,
                         onChanged: (val) {
                           setState(() => email = val.trim());
                         }),
@@ -129,7 +136,7 @@ class _SignUpState extends State<SignUp> {
                       height: 30.0,
                       child: Align(
                           alignment: Alignment(-.99, .95),
-                          child: Text("Choose Password")),
+                          child: Text(translatedText(context, 'signUp.choosePassword'))),
                     ),
                     TextFormField(
                         decoration: InputDecoration(
@@ -138,11 +145,11 @@ class _SignUpState extends State<SignUp> {
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(5.0),
                           ),
-                          hintText: "Password",
+                          hintText: translatedText(context, 'signUp.choosePassword'),
                           errorStyle: TextStyle(color: Colors.red),
                         ),
                         validator: (val) => val.length < 6
-                            ? 'Enter a password 6+ chars long'
+                            ? translatedText(context, 'validation.password')
                             : null,
                         obscureText: true,
                         onChanged: (val) {
@@ -154,7 +161,7 @@ class _SignUpState extends State<SignUp> {
                       height: 30.0,
                       child: Align(
                           alignment: Alignment(-.99, .95),
-                          child: Text("Confirm Password")),
+                          child: Text(translatedText(context, 'signUp.confirmPassword'))),
                     ),
                          TextFormField(
                         decoration: InputDecoration(
@@ -163,11 +170,11 @@ class _SignUpState extends State<SignUp> {
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(5.0),
                           ),
-                          hintText: "Password",
+                          hintText: translatedText(context, 'signUp.confirmPassword'),
                           errorStyle: TextStyle(color: Colors.red),
                         ),
                         validator: (val) => val.length < 6
-                            ? 'Enter a password 6+ chars long'
+                            ? translatedText(context, 'validation.password')
                             : null,
                         obscureText: true,
                         onChanged: (val) {
@@ -190,14 +197,14 @@ class _SignUpState extends State<SignUp> {
                         if (_formkey.currentState.validate() && (choosePassword == confirmPassword)) {
                           handleSignUp();
                         } else if(choosePassword != confirmPassword) {
-                          setState(() => error = 'Passwords do not match!');
+                          setState(() => error = translatedText(context, 'signUp.choosePassword'));
                         }
                       },
                       child: Container(
                         width: double.infinity,
                         padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
                         child: Center(
-                          child: Text('Sign Up',
+                          child: Text(translatedText(context, 'signUp.signUp'),
                               style: TextStyle(
                                 fontSize: 20,
                               )),
@@ -208,7 +215,7 @@ class _SignUpState extends State<SignUp> {
                       height: 50.0,
                     ),
                     SizedBox(
-                      child: Text("Or Sign In Using"),
+                      child: Text(translatedText(context, 'signUp.orSignInUsing')),
                     ),
                     SizedBox(
                       child: Padding(
@@ -241,10 +248,12 @@ class _SignUpState extends State<SignUp> {
       print('error $result');
       setState(() => error = result);
     } else {
-      print('handleSignup $result');
-      ref.add({
+      print('handleSignup user id ${result.user.uid}');
+      ref.doc(result.user.uid).set({
         'firstName': '$firstName',
         'lastName': '$lastName',
+        'email': '$email',
+        'signUpTimeStamp': DateTime.now()  
       });
       setState(() {
         firstName = '';
@@ -252,6 +261,10 @@ class _SignUpState extends State<SignUp> {
       //showDialog(context: context, builder: (_) => Alert());
     }
   }
+}
+
+String translatedText(context, String json) {
+  return AppLocalizations.of(context).tr(json);
 }
 
 // class Alert extends StatelessWidget {

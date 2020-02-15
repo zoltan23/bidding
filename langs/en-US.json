@@ -1,6 +1,6 @@
 {
   "login": {
-      "title": "English",
+      "title": "English Login",
       "email": "EN email",
       "password": "EN password",
       "login": "EN login",
@@ -13,5 +13,21 @@
   "validation": {
       "validEmail": "EN Enter a valid email",
       "validPassword": "EN Enter a password 6+ chars long"
+  },
+  "signUp": {
+    "title": "EN Sign up",
+    "firstName": "EN First Name",
+    "lastName": "EN Last Name",
+    "email": "EN email",
+    "choosePassword": "EN Choose Password",
+    "confirmPassword": "EN Confirm Password",
+    "signUp": "EN Sign Up",
+    "orSignInUsing": "EN Or sign in Using"
+  },
+  "navbar": {
+    "home": "EN Home",
+    "crud": "EN CRUD",
+    "settings": "EN Settings",
+    "signOut": "EN Sign Out"
   }
 }
