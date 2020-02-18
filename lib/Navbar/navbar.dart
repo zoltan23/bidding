@@ -32,12 +32,16 @@ class DesktopNavbar extends StatelessWidget {
           child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-            Text(
-              'Retroportal Studio',
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                  fontSize: 30),
+            Row(
+              children: <Widget>[
+                Text(
+                  'Retroportal Studio',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                      fontSize: 30),
+                ),
+              ],
             ),
             Row(
               children: <Widget>[

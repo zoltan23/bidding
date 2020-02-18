@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hello_world/services/auth.dart';
+import '../UI/select_language.dart';
+import 'package:easy_localization/easy_localization.dart';
+
 
 class Reset extends StatefulWidget {
   @override
@@ -18,9 +21,12 @@ class _ResetState extends State<Reset> {
     return Scaffold(
       backgroundColor: Colors.brown[100],
       appBar: AppBar(
+        actions: <Widget>[
+          SelectLanguage(),
+        ],
         centerTitle: true,
         elevation: 0.0,
-        title: Text('Reset Password'),
+        title: Text(translatedText(context, 'reset.title')),
       ),
       body: Container(
         padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
@@ -37,7 +43,7 @@ class _ResetState extends State<Reset> {
                   SizedBox(
                     height: 60.0,
                     child: Align(
-                        alignment: Alignment(-.99, .95), child: Text("Email")),
+                        alignment: Alignment(-.99, .95), child: Text(translatedText(context, 'reset.email'))),
                   ),
                   TextFormField(
                       decoration: InputDecoration(
@@ -46,11 +52,11 @@ class _ResetState extends State<Reset> {
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5.0),
                         ),
-                        hintText: "Email",
+                        hintText: translatedText(context, 'reset.email'),
                         errorStyle: TextStyle(color: Colors.red),
                       ),
                       validator: (val) =>
-                          val.isEmpty ? 'Enter a valid email.' : null,
+                          val.isEmpty ? translatedText(context, 'validator.email') : null,
                       onChanged: (val) {
                         setState(() => email = val.trim());
                       }),
@@ -77,7 +83,7 @@ class _ResetState extends State<Reset> {
                       width: double.infinity,
                       padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
                       child: Center(
-                        child: Text('Send Password Reset Email',
+                        child: Text(translatedText(context, 'sendPasswordReset'),
                             style: TextStyle(
                               fontSize: 20,
                             )),
@@ -122,3 +128,7 @@ class Alert extends StatelessWidget {
     );
   }
 }
+
+String translatedText(context, String json) {
+  return AppLocalizations.of(context).tr(json);
+} 

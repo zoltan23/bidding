@@ -97,23 +97,23 @@ class _SignInState extends State<SignIn> {
                     padding: EdgeInsets.all(0.0),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(80.0)),
-                    // onPressed: () {
-                    //   Navigator.pushNamed(context, '/landing');
-                    // print(DateTime.now());
-                    // },
-                    onPressed: () async {
-                      if (_formkey.currentState.validate()) {
-                        dynamic result = await _auth
-                            .signInWithEmailAndPassword(email, password);
-                        if (result is String) {
-                          print('result $result');
-                          setState(() => error = result);
-                        } else {
-                          print('Signed In');
-                          Navigator.pushNamed(context, '/landing');
-                        }
-                      }
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/landing');
+                    print(DateTime.now());
                     },
+                    // onPressed: () async {
+                    //   if (_formkey.currentState.validate()) {
+                    //     dynamic result = await _auth
+                    //         .signInWithEmailAndPassword(email, password);
+                    //     if (result is String) {
+                    //       print('result $result');
+                    //       setState(() => error = result);
+                    //     } else {
+                    //       print('Signed In');
+                    //       Navigator.pushNamed(context, '/landing');
+                    //     }
+                    //   }
+                    // },
                     child: Container(
                       width: double.infinity,
                       padding: EdgeInsets.fromLTRB(20, 10, 20, 10),

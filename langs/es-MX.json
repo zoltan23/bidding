@@ -1,7 +1,11 @@
-{
+{   
+    "form": {
+        "firstName": "Es First Name",
+        "lastName": "Es Last Name",
+        "email": "ES email"
+    },
     "login": {
         "title": "Espanol Login",
-        "email": "ES email",
         "password": "ES password",
         "login": "ES login",
         "signIn": "ES signin",
@@ -18,8 +22,6 @@
     },
     "signUp": {
         "title": "ES Sign up",
-        "firstName": "ES First Name",
-        "lastName": "ES Last Name",
         "email": "ES email",
         "choosePassword": "ES Choose Password",
         "confirmPassword": "ES Confirm Password",
@@ -31,5 +33,12 @@
         "crud": "ES CRUD",
         "settings": "ES Settings",
         "signOut": "ES Sign Out"
+      },
+      "reset": {
+          "title":"ES Reset",
+          "sendPasswordReset": "ES Send Password Reset"
+      },
+      "settings": {
+          "updateSettings": "Update Settings"
       }
   }

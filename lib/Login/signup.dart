@@ -128,7 +128,10 @@ class _SignUpState extends State<SignUp> {
                         validator: (val) =>
                             val.isEmpty ? translatedText(context, 'validation.email') : null,
                         onChanged: (val) {
-                          setState(() => email = val.trim());
+                          setState(() {
+                            email = val.trim();
+                          });
+                       //   setState(() => email = val.trim());
                         }),
 
                     //Choose Password
@@ -258,7 +261,6 @@ class _SignUpState extends State<SignUp> {
       setState(() {
         firstName = '';
       });
-      //showDialog(context: context, builder: (_) => Alert());
     }
   }
 }
@@ -266,23 +268,4 @@ class _SignUpState extends State<SignUp> {
 String translatedText(context, String json) {
   return AppLocalizations.of(context).tr(json);
 }
-
-// class Alert extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return AlertDialog(
-//       title: Text('Congratulations!'),
-//       content: const Text(
-//           'You have been successfully registered!'),
-//       actions: <Widget>[
-//         FlatButton(
-//           child: Text('Ok'),
-//           onPressed: () {
-//             Navigator.pushNamed(context, '/signin');
-//           },
-//         ),
-//       ],
-//     );
-//   }
-// }
 
